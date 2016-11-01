@@ -6,4 +6,6 @@
 
 const User = require('./user')
 
-module.exports = {User}
+const FoodTruck = ('./food-truck')
+
+module.exports = {User, FoodTruck}
