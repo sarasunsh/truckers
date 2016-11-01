@@ -68,6 +68,7 @@ customOrderRoutes.post('/', (req, res, next)=>{
 	Promise.all(orderPromises)
 	.then(createdOrders=>{
 		console.log("Created orders")
+		res.sendStatus(200);
 	})
 })
 
