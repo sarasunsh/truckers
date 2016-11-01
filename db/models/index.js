@@ -14,12 +14,16 @@ const FoodTruck = ('./food-truck')
 
 //// which one of these two approaches is better?
 // Difference between HasOne and BelongsTo -- http://docs.sequelizejs.com/en/latest/docs/associations/
-Order.hasOne(User);
 Order.belongsTo(User);  // I believe this approach will put a UserID in the Order table
-
 Order.belongsTo(Truck);
 
+Truck.hasMany(Order);
 User.hasMany(Order);
 
+Truck.hasMany(MenuItem);
+
+
+Order.belongsToMany(MenuItem), {through: OrderItem});
+MenuItem.belongsToMany(Order, {through: OrderItem });
 
 module.exports = {User, Order, FoodTruck, MenuItem};
