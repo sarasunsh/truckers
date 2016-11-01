@@ -6,6 +6,7 @@
 
 const User = require('./user');
 const Order = require('./order');
+const MenuItem = require('./menuItem');
 const FoodTruck = ('./food-truck')
 
 
@@ -21,4 +22,4 @@ Order.belongsTo(Truck);
 User.hasMany(Order);
 
 
-module.exports = {User, Order, FoodTruck};
+module.exports = {User, Order, FoodTruck, MenuItem};
