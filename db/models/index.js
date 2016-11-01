@@ -25,4 +25,4 @@ FoodTruck.hasMany(MenuItem);
 Order.belongsToMany(MenuItem, {through: OrderItem});
 MenuItem.belongsToMany(Order, {through: OrderItem });
 
-module.exports = {User, Order, FoodTruck, MenuItem};
+module.exports = { User, Order, FoodTruck, MenuItem, OrderItem };

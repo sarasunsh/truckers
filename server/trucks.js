@@ -24,11 +24,7 @@ customTruckRoutes.get('/', function(req, res, next) {
 
 // Route to menu page for specific truck
 customTruckRoutes.get('/:truckID', function(req, res, next) {
-    MenuItem.findAll({
-        where: {foodtruckId: req.truck.id } // TO DO: confirm how truckID will be stored in MenuItem table
-    })
-    .then(truckItems => res.send(truckItems)) // TO DO: do we need to res.json the response or is there a parser somewhere?
-    .catch(next);
+    res.send(req.truck);  // TO DO: do we need to res.json the response or is there a parser somewhere?
 });
 
 // Route to create new truck
