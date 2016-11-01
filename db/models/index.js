@@ -6,6 +6,8 @@
 
 const User = require('./user');
 const Order = require('./order');
+const FoodTruck = ('./food-truck')
+
 
 // THIS NEEDS TO BE REFINED
 
@@ -19,4 +21,4 @@ Order.belongsTo(Truck);
 User.hasMany(Order);
 
 
-module.exports = {User, Order};
+module.exports = {User, Order, FoodTruck};
