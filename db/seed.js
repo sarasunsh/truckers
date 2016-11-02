@@ -1,4 +1,5 @@
 const db = require('APP/db')
+<<<<<<< HEAD
 const { foodTrucks, menuItems, users } = require('./seedData')
 
 const seedFoodTrucks = () => db.Promise.map(foodTrucks, truck => db.model('foodTrucks').create(truck));
