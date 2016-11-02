@@ -1,5 +1,4 @@
 const db = require('APP/db')
-<<<<<<< HEAD
 const { foodTrucks, menuItems, users } = require('./seedData')
 
 const seedFoodTrucks = () => db.Promise.map(foodTrucks, truck => db.model('foodTrucks').create(truck));
@@ -13,7 +12,6 @@ db.didSync
   .then(seedUsers)
   .then(trucks => {
     console.log(`Seeded foodTrucks, menuItems, and users`)
-    // console.log(trucks)
   })
   .catch(error => console.error(error))
   .finally(() => db.close())
