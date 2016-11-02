@@ -21,7 +21,7 @@ const Promise = require('sequelize').Promise; // sequelize comes with Bluebird
 // CREATE (POST)
 	// a post request should contain and Object with:
 	// - userId, who is this order from?
-	// - TruckId, who is this order for?
+	// - foodTruckId, who is this order for?
 	// - MenuItemId, what does this order contain?
 	// - Orders (Array), what items did this person order?
 
@@ -29,7 +29,7 @@ const Promise = require('sequelize').Promise; // sequelize comes with Bluebird
 	// {
 	// 	userId: 123,
 	// 	completed: false,
-	// 	truckId: 234,
+	// 	foodTruckId: 234,
 	// 	orders: [
 	// 		{menuItemId: 1, quantity: 2},
 	// 		{menuItemId: 2, quantity: 1},
@@ -40,13 +40,11 @@ const Promise = require('sequelize').Promise; // sequelize comes with Bluebird
 
 customOrderRoutes.post('/', (req, res, next)=>{
 	const userId = req.body.userId; // userId: 123
-	const truckId = req.body.truckId; // truckId: 234
+	const foodTruckId = req.body.foodTruckId; // foodTruckId: 234
 	const orders = req.body.orders; // orders: { menuItem, quantity }
 
-
-	console.log(req)
 	// sanity check: none of these three things can be missing
-	// if !(userId && truckId && orders){
+	// if !(userId && foodTruckId && orders){
 	// 	return res.status(500).send("Please provide a complete order object");
 	// }
 
@@ -59,8 +57,8 @@ customOrderRoutes.post('/', (req, res, next)=>{
 		}).then(newOrder=>{
 			// define each new order's associations
 			const orderPromise = newOrder.setUser(userId);
-			const truckPromise = newOrder.setTruck(truckId);
-			const menuItemPromise = newOrder.setMenuItem(order.menuItemId, {quantity: order.quantity});
+			const truckPromise = newOrder.setFoodTruck(foodTruckId);
+			const menuItemPromise = newOrder.addMenuItem(order.menuItemId, {quantity: order.quantity});
 				// ^ association table with {quantity} as an extra attribute
 
 			return Promise.all([orderPromise, truckPromise, menuItemPromise]);
@@ -90,17 +88,10 @@ customOrderRoutes.get('/:orderId', (req, res, next)=>{
 
 	Order.findOne({
 		where: { id: orderId },
-		include: [	{ 	model: MenuItem,
-						attributes: ['quantity'] // include 'quantity' attribute from the through-table 'OrderItems'
-					},
-					{	model: User
-					},
-					{	model: FoodTruck
-					}
-				]
+		include: [{ model: MenuItem }]
 	})
-	.then(allOrdersFromThisUser=>{
-		res.json(allOrdersFromThisUser);
+	.then(specificOrder=>{
+		res.json(specificOrder);
 	})
 })
 
@@ -109,11 +100,8 @@ customOrderRoutes.get('/user/:userId', (req, res, next)=>{
 	const userId = req.params.userId;
 
 	Order.findAll({
-		where: { userId },
-		include: [	{ 	model: MenuItem,
-						attributes: ['quantity'] // include 'quantity' attribute from the through-table 'OrderItems'
-					}
-				]
+		where: { user_id: userId },
+		include: [{ model: MenuItem }]
 	})
 	.then(allOrdersFromThisUser=>{
 		res.json(allOrdersFromThisUser);
@@ -121,34 +109,38 @@ customOrderRoutes.get('/user/:userId', (req, res, next)=>{
 })
 
 // Foodtruck should be able to get all of its orders, past and present
-customOrderRoutes.get('/truck/:truckId', (req, res, next)=>{
-	const truckId = req.params.truckId;
+customOrderRoutes.get('/truck/:foodTruckId', (req, res, next)=>{
+	const foodTruckId = req.params.foodTruckId;
 
 	Order.findAll({
-		where: { truckId },
-		include: [	{ 	model: MenuItem,
-						attributes: ['quantity'] // include 'quantity' attribute from the through-table 'OrderItems'
-					}
-				]
+		where: { food_truck_id: foodTruckId },
+		include: [{ model: MenuItem }]
 	})
 	.then(allOrdersFromThisUser=>{
 		res.json(allOrdersFromThisUser);
 	})
 })
 
-// UPDATE
-customOrderRoutes.put('/', (req, res, next)=>{
+// UPDATE (completed order)
+// edit a single order
+customOrderRoutes.put('/:orderId', (req, res, next)=>{
+	const orderId = req.params.orderId;
 
+	Order.update(
+		{ completed: true },
+		{ where: {id: orderId} }
+	).then(()=>{
+		res.sendStatus(200);
+	})
 })
 
 // DELETE
-customOrderRoutes.delete('/', (req, res, next)=>{
+customOrderRoutes.delete('/:orderId', (req, res, next)=>{
+	const orderId = req.params.orderId;
 
+	Order.destroy({
+		where: {id: orderId}
+	})
 })
-
-
-
-
-
 
 module.exports = customOrderRoutes;
