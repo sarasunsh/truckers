@@ -61,6 +61,6 @@ const dataGenerator = (times, generator) => {
   return data;
 }
 
-exports.foodTrucks = dataGenerator(100, casual._foodTruckModel));
+exports.foodTrucks = dataGenerator(100, casual._foodTruckModel);
 exports.menuItems = dataGenerator(100, casual._menuItemModel);
 exports.users = dataGenerator(100, casual._userModel);
