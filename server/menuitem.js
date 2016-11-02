@@ -2,7 +2,7 @@
 
 const db = require('APP/db')
 const customMenuItemRoutes = require('express').Router()
-const { FoodTruck, MenuItem } = require('../db/models');
+const { FoodTruck, MenuItems } = require('../db/models');
 
 // If truckID is part of the request parameter, this will store the appropriate truck info on the request
 customMenuItemRoutes.param('itemID', function(req, res, next, truckID){
@@ -24,22 +24,33 @@ customMenuItemRoutes.param('truckID', function(req, res, next, truckID){
     .catch(next);
 });
 
-// Route to menu page for specific truck
-customMenuItemRoutes.get('/:truckID/menu', function(req, res, next) {
-    MenuItem.findAll({
-        where: {foodtruckId: req.truck.id } // TO DO: confirm how foodtruckId will be stored in MenuItem table
-    })
-    .then(truckItems => res.send(truckItems)) // TO DO: do we need to res.json the response or is there a parser somewhere?
+// Route for main page -- get all trucks
+customMenuItemRoutes.get('/', function(req, res, next) {
+    console.log('in correct route')
+    MenuItems.findAll()
+    .then(items =>  {
+        console.log(items)
+        res.json(items)
+      })
     .catch(next);
 });
 
 // Route to menu page for specific truck
-customMenuItemRoutes.get('/:truckID/menu/:itemID', function(req, res, next) {
+customMenuItemRoutes.get('/:truckID', function(req, res, next) {
+    MenuItem.findAll({
+        where: {foodtruckId: req.truck.id } // TO DO: confirm how foodtruckId will be stored in MenuItem table
+    })
+    .then(items => res.send(items)) // TO DO: do we need to res.json the response or is there a parser somewhere?
+    .catch(next);
+});
+
+// Route to menu page for specific truck
+customMenuItemRoutes.get('/:itemID', function(req, res, next) {
     res.send(req.item);
 });
 
 // Route to create new truck
-customMenuItemRoutes.post('/:truckID/menu/', function(req, res, next) {
+customMenuItemRoutes.post('/:truckID/', function(req, res, next) {
     req.truck.createMenuItem(req.body) // TO DO: confirm that this works as expected
     .then(newItem => res.status(201).send(newItem))
     .catch(next);

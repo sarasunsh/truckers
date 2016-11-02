@@ -1,4 +1,8 @@
 'use strict'
+const NUMBER_OF_FOOD_TRUCKS = 20;
+const NUMBER_OF_MENU_ITEMS = 300;
+const NUMBER_OF_USERS = 100;
+
 
 const casual = require('casual');
 
@@ -35,11 +39,13 @@ const foodTruckModel = casual.define('foodTruckModel', () => {
   }
 })
 
+// food_truck_id must be defined as well
 const menuItemModel = casual.define('menuItemModel', () => {
   return {
     name: casual.word,
     description: casual.short_description,
-    price: casual.integer(1, 15)
+    price: casual.integer(1, 15),
+    food_truck_id: casual.integer(1, NUMBER_OF_FOOD_TRUCKS)
   }
 })
 
@@ -47,7 +53,8 @@ const userModel = casual.define('userModel', () => {
   return {
     name: casual.full_name,
     email: casual.email,
-    isVendor: casual.coin_flip
+    isVendor: casual.coin_flip,
+    food_truck_id: casual.integer(1, NUMBER_OF_FOOD_TRUCKS)
   }
 })
 
@@ -61,6 +68,6 @@ const dataGenerator = (times, generator) => {
   return data;
 }
 
-exports.foodTrucks = dataGenerator(100, casual._foodTruckModel);
-exports.menuItems = dataGenerator(100, casual._menuItemModel);
-exports.users = dataGenerator(100, casual._userModel);
+exports.foodTrucks = dataGenerator(NUMBER_OF_FOOD_TRUCKS, casual._foodTruckModel);
+exports.menuItems = dataGenerator(NUMBER_OF_MENU_ITEMS, casual._menuItemModel);
+exports.users = dataGenerator(NUMBER_OF_USERS, casual._userModel);
