@@ -13,7 +13,7 @@ console.log(chalk.yellow(`Opening database connection to ${url}`));
 
 // create the database instance
 const db = module.exports = new Sequelize(url, {
-  logging: debug, // export DEBUG=sql in the environment to get SQL queries 
+  logging: debug, // export DEBUG=sql in the environment to get SQL queries
   native: true,   // lets Sequelize know we can use pg-native for ~30% more speed
   define: {
     underscored: true,       // use snake_case rather than camelCase column names
@@ -23,22 +23,36 @@ const db = module.exports = new Sequelize(url, {
 })
 
 // pull in our models
-require('./models')
+const models = require('./models');
+
+const User = models.User;
+const Order = models.Order;
+const MenuItem = models.MenuItem;
+const FoodTruck = models.FoodTruck;
 
 // sync the db, creating it if necessary
 function sync(force=app.isTesting) {
+
+  const userCreate = User.bulkCreate(users);
+  const foodTruckCreate = FoodTruck.bulkCreate(foodTrucks);
+  const orderCreate = Order.bulkCreate(orders);
+  const menuItemCreate = MenuItem.bulkCreate(menuItems);
+
   return db.sync({force})
+    .them(() => {
+      return Promise.all([userCreate, foodTruckCreate, orderCreate, menuItemCreate])
+    })
     .then(ok => console.log(`Synced models to db ${url}`))
     .catch(fail => {
-      if (app.isProduction) {
+      // if (app.isProduction) {
         console.error(fail)
-        return // Don't do this auto-create nonsense in prod
-      }
+      //   return // Don't do this auto-create nonsense in prod
+      // }
       // Otherwise, do this autocreate nonsense
-      console.log(`Creating database ${name}...`)
-      return new Promise((resolve, reject) =>
-        require('child_process').exec(`createdb "${name}"`, resolve)
-      ).then(() => sync(true))
+      // console.log(`Creating database ${name}...`)
+      // return new Promise((resolve, reject) =>
+      //   require('child_process').exec(`createdb "${name}"`, resolve)
+      // ).then(() => sync(true))
     })
 }
 

@@ -5,9 +5,9 @@
 // to get access to the User model.
 
 const User = require('./user');
-const Order = require('./order');
+const Order = require('./orders');
 const MenuItem = require('./menuItem');
-const FoodTruck = ('./food-truck')
+const FoodTruck = ('./foodTruck')
 
 
 // THIS NEEDS TO BE REFINED
@@ -17,7 +17,7 @@ const FoodTruck = ('./food-truck')
 Order.hasOne(User);
 Order.belongsTo(User);  // I believe this approach will put a UserID in the Order table
 
-Order.belongsTo(Truck);
+Order.belongsTo(FoodTruck);
 
 User.hasMany(Order);
 
