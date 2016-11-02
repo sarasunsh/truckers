@@ -23,7 +23,7 @@ Order.belongsTo(FoodTruck);
 FoodTruck.hasMany(MenuItem);
 
 User.hasOne(FoodTruck);
-FoodTruck.hasOne(User);
+FoodTruck.belongsTo(User); // or else cyclic dependency
 
 Order.belongsToMany(MenuItem, {through: OrderItem});
 MenuItem.belongsToMany(Order, {through: OrderItem });
