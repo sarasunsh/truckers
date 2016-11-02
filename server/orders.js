@@ -14,7 +14,7 @@
 	// Order.belongsToMany(MenuItem), {through: OrderItem});
 
 const db = require('APP/db');
-const { Order, MenuItem, OrderItem, User, FoodTruck } = db;
+const { Order, MenuItem, OrderItem, User, FoodTruck } = require('../db/models');
 const customOrderRoutes = require('express').Router();
 const Promise = require('sequelize').Promise; // sequelize comes with Bluebird
 
@@ -43,6 +43,8 @@ customOrderRoutes.post('/', (req, res, next)=>{
 	const truckId = req.body.truckId; // truckId: 234
 	const orders = req.body.orders; // orders: { menuItem, quantity }
 
+
+	console.log(req)
 	// sanity check: none of these three things can be missing
 	// if !(userId && truckId && orders){
 	// 	return res.status(500).send("Please provide a complete order object");
@@ -73,6 +75,14 @@ customOrderRoutes.post('/', (req, res, next)=>{
 })
 
 // READ
+
+// Get ALL orders
+customOrderRoutes.get('/', (req, res, next)=>{
+	Order.findAll()
+	.then(allOrders=>{
+		res.json(allOrders);
+	})
+})
 
 // Get all info on a specific order
 customOrderRoutes.get('/:orderId', (req, res, next)=>{
