@@ -15,8 +15,8 @@ customTruckRoutes.param('truckID', function(req, res, next, truckID){
 });
 
 // If menu item ID is part of the request parameter, this will store the appropriate item info on the request
-customTruckRoutes.param('itemID', function(req, res, next, truckID){
-    MenuItem.findById(req.params.menuID)
+customTruckRoutes.param('itemID', function(req, res, next, itemID){
+    MenuItem.findById(req.params.itemID)
     .then(foundMenuItem => {
         req.item = foundMenuItem;
         next()
@@ -64,7 +64,7 @@ customTruckRoutes.post('/', function(req, res, next) {
 
 // Route to create new menu item for specific truck
 customTruckRoutes.post('/:truckID/menu', function(req, res, next) {
-    req.truck.createMenuItem(req.body) // TO DO: confirm that this works as expected
+    req.truck.createMenuItem(req.body)
     .then(newItem => res.json(newItem))
     .catch(next);
 });
@@ -80,7 +80,7 @@ customTruckRoutes.put('/:truckID', function(req, res, next) {
 });
 
 // Route to update info on menu item for specific truck
-customTruckRoutes.post('/:truckID/menu/:itemID', function(req, res, next) {
+customTruckRoutes.put('/:truckID/menu/:itemID', function(req, res, next) {
     req.item.update(req.body)
     .then(updatedItem => res.json(updatedItem))
     .catch(next);
@@ -91,16 +91,20 @@ customTruckRoutes.post('/:truckID/menu/:itemID', function(req, res, next) {
 
 // Route to delete specific truck
 customTruckRoutes.delete('/:truckID', function(req, res, next) {
-    // TO DO: can we use req.truck for deleting? Do we want to automatically destroy all MenuItems?
-    req.truck.destroy()
-    .then(destroyedTruck => res.json(destroyedTruck))
+    const itemPromise = MenuItem.destroy({
+        where: {food_truck_id: req.truck.id }
+    });
+    const truckPromise = req.truck.destroy();
+
+    Promise.all([itemPromise, truckPromise])
+    .then(res => res.sendStatus(204))
     .catch(next)
 });
 
 // Route to delete specific truck
 customTruckRoutes.delete('/:truckID/menu/:itemID', function(req, res, next) {
     req.item.destroy()
-    .then(destroyedItem => res.json(destroyedItem))
+    .then(res => res.sendStatus(204))
     .catch(next)
 });
 
