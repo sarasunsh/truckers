@@ -12,7 +12,6 @@ db.didSync
   .then(seedUsers)
   .then(trucks => {
     console.log(`Seeded foodTrucks, menuItems, and users`)
-    // console.log(trucks)
   })
   .catch(error => console.error(error))
   .finally(() => db.close())
