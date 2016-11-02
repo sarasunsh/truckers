@@ -13,7 +13,7 @@ console.log(chalk.yellow(`Opening database connection to ${url}`));
 
 // create the database instance
 const db = module.exports = new Sequelize(url, {
-  logging: debug, // export DEBUG=sql in the environment to get SQL queries 
+  logging: debug, // export DEBUG=sql in the environment to get SQL queries
   native: true,   // lets Sequelize know we can use pg-native for ~30% more speed
   define: {
     underscored: true,       // use snake_case rather than camelCase column names
@@ -23,23 +23,6 @@ const db = module.exports = new Sequelize(url, {
 })
 
 // pull in our models
-require('./models')
+require('./models');
 
-// sync the db, creating it if necessary
-function sync(force=app.isTesting) {
-  return db.sync({force})
-    .then(ok => console.log(`Synced models to db ${url}`))
-    .catch(fail => {
-      if (app.isProduction) {
-        console.error(fail)
-        return // Don't do this auto-create nonsense in prod
-      }
-      // Otherwise, do this autocreate nonsense
-      console.log(`Creating database ${name}...`)
-      return new Promise((resolve, reject) =>
-        require('child_process').exec(`createdb "${name}"`, resolve)
-      ).then(() => sync(true))
-    })
-}
-
-db.didSync = sync()
+db.didSync = db.sync({force: true}).then(ok => {console.log('Synced')}).catch();

@@ -3,19 +3,19 @@
 const Sequelize = require('sequelize')
 const db = require('APP/db')
 
-const FoodTruck = db.define('FoodTrucks', {
+const FoodTruck = db.define('foodTrucks', {
     name: {
         type: Sequelize.STRING,
         allowNull: false
     },
     description: {
-        type: Sequelize.TEXT
+        type: Sequelize.STRING
     },
     location: {
-        type: Sequelize.TEXT
+        type: Sequelize.STRING
     },
     website: {
-        type: Sequelize.TEXT
+        type: Sequelize.STRING
     },
     cuisine: {
         type: Sequelize.STRING,
@@ -23,9 +23,6 @@ const FoodTruck = db.define('FoodTrucks', {
     },
     image: {
         type: Sequelize.TEXT
-    },
-    tags: {
-        type: Sequelize.ARRAY(Sequelize.TEXT)
     }
 })
 
