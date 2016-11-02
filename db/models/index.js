@@ -22,6 +22,8 @@ User.hasMany(Order);
 Order.belongsTo(FoodTruck);
 FoodTruck.hasMany(MenuItem);
 
+User.hasOne(FoodTruck);
+FoodTruck.hasOne(User);
 
 Order.belongsToMany(MenuItem, {through: OrderItem});
 MenuItem.belongsToMany(Order, {through: OrderItem });
