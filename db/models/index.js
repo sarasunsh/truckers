@@ -6,9 +6,9 @@
 // to get access to the User model.
 
 const User = require('./user');
-const Order = require('./order');
+const Order = require('./orders');
 const MenuItem = require('./menuItem');
-const FoodTruck = require('./food-truck');
+const FoodTruck = require('./foodTruck')
 const OrderItem = require('./orderItem');
 
 
@@ -19,6 +19,7 @@ Order.belongsTo(FoodTruck);
 FoodTruck.hasMany(Order);
 User.hasMany(Order);
 
+Order.belongsTo(FoodTruck);
 FoodTruck.hasMany(MenuItem);
 
 
