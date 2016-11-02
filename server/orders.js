@@ -1,14 +1,14 @@
 'use strict'
 // INTRODUCTION
 // This file specifies CRUD routes for order records
-	// 
+	//
 	// Order: {
 	// 		quantity: integer
 	// 		completed: boolean
 	// }
-	// 
+	//
 // ASSOCIATIONS
-	// 
+	//
 	// Order.belongsTo(User);
 	// Order.belongsTo(Truck);
 	// Order.belongsToMany(MenuItem), {through: OrderItem});
@@ -24,17 +24,17 @@ const Promise = require('sequelize').Promise; // sequelize comes with Bluebird
 	// - TruckId, who is this order for?
 	// - MenuItemId, what does this order contain?
 	// - Orders (Array), what items did this person order?
-	
+
 	// Example:
 	// {
 	// 	userId: 123,
 	// 	completed: false,
 	// 	truckId: 234,
 	// 	orders: [
-	// 		{menuItemId: 1, quantity: 2}, 
-	// 		{menuItemId: 2, quantity: 1}, 
-	// 		{menuItemId: 2, quantity: 1}, 
-	// 		{menuItemId: 9, quantity: 1}, 
+	// 		{menuItemId: 1, quantity: 2},
+	// 		{menuItemId: 2, quantity: 1},
+	// 		{menuItemId: 2, quantity: 1},
+	// 		{menuItemId: 9, quantity: 1},
 	// 	]
 	// }
 
@@ -44,9 +44,9 @@ customOrderRoutes.post('/', (req, res, next)=>{
 	const orders = req.body.orders; // orders: { menuItem, quantity }
 
 	// sanity check: none of these three things can be missing
-	if !(userId && truckId && orders){
-		return res.status(500).send("Please provide a complete order object");
-	}
+	// if !(userId && truckId && orders){
+	// 	return res.status(500).send("Please provide a complete order object");
+	// }
 
 	// if everything is present start creating order rows!
 	const orderPromises = orders.map(order=>{
@@ -78,11 +78,11 @@ customOrderRoutes.post('/', (req, res, next)=>{
 customOrderRoutes.get('/:orderId', (req, res, next)=>{
 	const orderId = req.params.orderId;
 
-	Order.findOne({ 
-		where: { id: orderId }, 
-		include: [	{ 	model: MenuItem, 
+	Order.findOne({
+		where: { id: orderId },
+		include: [	{ 	model: MenuItem,
 						attributes: ['quantity'] // include 'quantity' attribute from the through-table 'OrderItems'
-					}, 
+					},
 					{	model: User
 					},
 					{	model: FoodTruck
@@ -98,9 +98,9 @@ customOrderRoutes.get('/:orderId', (req, res, next)=>{
 customOrderRoutes.get('/user/:userId', (req, res, next)=>{
 	const userId = req.params.userId;
 
-	Order.findAll({ 
-		where: { userId }, 
-		include: [	{ 	model: MenuItem, 
+	Order.findAll({
+		where: { userId },
+		include: [	{ 	model: MenuItem,
 						attributes: ['quantity'] // include 'quantity' attribute from the through-table 'OrderItems'
 					}
 				]
@@ -114,9 +114,9 @@ customOrderRoutes.get('/user/:userId', (req, res, next)=>{
 customOrderRoutes.get('/truck/:truckId', (req, res, next)=>{
 	const truckId = req.params.truckId;
 
-	Order.findAll({ 
-		where: { truckId }, 
-		include: [	{ 	model: MenuItem, 
+	Order.findAll({
+		where: { truckId },
+		include: [	{ 	model: MenuItem,
 						attributes: ['quantity'] // include 'quantity' attribute from the through-table 'OrderItems'
 					}
 				]
