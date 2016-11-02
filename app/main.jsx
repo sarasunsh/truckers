@@ -8,6 +8,7 @@ import store from './store'
 import Root from './components/Root'
 import AppContainer from './components/AppContainer';
 import Login from './components/Login'
+import Navbar from './components/Navbar'
 
 render (
   <Provider store={store}>
