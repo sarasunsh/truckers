@@ -53,8 +53,9 @@ const userModel = casual.define('userModel', () => {
   return {
     name: casual.full_name,
     email: casual.email,
-    isVendor: casual.coin_flip,
-    food_truck_id: casual.integer(1, NUMBER_OF_FOOD_TRUCKS)
+    isVendor: casual.coin_flip
+    // ,
+    // food_truck_id: casual.integer(1, NUMBER_OF_FOOD_TRUCKS)
   }
 })
 
