@@ -25,4 +25,4 @@ const db = module.exports = new Sequelize(url, {
 // pull in our models
 require('./models');
 
-db.didSync = db.sync({force: true}).then(ok => {console.log('Synced')}).catch();
+db.didSync = db.sync().then(ok => {console.log('Synced')}).catch(); //took out {force:true} so that it wouldnt erase every time
