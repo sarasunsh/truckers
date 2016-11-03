@@ -19,7 +19,7 @@ export default class OurNav extends Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Navbar.Form pullLeft>
-            <Button type="submit"><Glyphicon glyph="globe" /></Button>
+            <Button type="submit"><Glyphicon glyph="map-marker" /></Button>
             <FormGroup>
               <FormControl type="text" placeholder="10 Hanover Square, NYC" />
             </FormGroup>
