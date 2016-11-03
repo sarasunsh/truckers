@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 
 import Sidebar from './Sidebar';
-// import NavbarContainer from './NavbarContainer';
+import OurNav from './OurNav';
 
 
 export default class App extends Component {
@@ -26,12 +26,16 @@ export default class App extends Component {
 
         return (
           <div id="main" className="container-fluid">
-            <div className="col-xs-2">
-              <Sidebar />
+          <OurNav />
+            <div className="row">
+                <div className="col-xs-2">
+                  <Sidebar />
+                </div>
+                <div className="col-xs-10">
+                    Food Trucks coming!
+                </div>
             </div>
-            <div className="col-xs-10">
-                Food Trucks coming!
-            </div>
+            <button type="button" className="btn btn-success">Test</button>
           </div>
         );
     }
