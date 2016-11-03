@@ -46,7 +46,7 @@ export default (props) => {
     ];
 
     return (
-      <div className="sidebar">
+      <div className="filters">
         <div className="filter-buttons">
           <ul>
             <li><Button onClick={() => onOpenClick}>Open Now</Button></li>
