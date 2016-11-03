@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import Sidebar from './Sidebar';
 import OurNav from './OurNav';
 import TruckItem from './truckItem';
-
+import TruckDescription from './TruckDescription'
 
 export default class App extends Component {
 
@@ -33,9 +33,7 @@ export default class App extends Component {
                   <Sidebar />
                 </div>
                 <div className="col-xs-10">
-                    <div className="col-xs-4">
-                        <TruckItem />
-                    </div>
+                    <TruckDescription/>
                 </div>
             </div>
             <button type="button" className="btn btn-success">Test</button>
