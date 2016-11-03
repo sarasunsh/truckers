@@ -1,5 +1,3 @@
--=-= CSS for Sidebar =-=-
-
 .sidebar {
   background-color: LightGray;
   border: 1px;
@@ -7,8 +5,7 @@
   height: 100%;
   overflow: auto;
   position: fixed;
-  top: 50px; // maybe?
-  width: 250px
+  width: 250px;
 }
 
 .filter-buttons {
@@ -29,7 +26,6 @@
     height: 50px;
     margin-bottom: 10px;
     position: fixed;
-    top: 50px // maybe?
     width: 100%;
   }
 
