@@ -2,9 +2,11 @@
 
 import React, { Component } from 'react';
 
-import Sidebar from './Sidebar';
+// import Sidebar from './Sidebar';
 import OurNav from './OurNav';
-import TruckDescription from './TruckDescription'
+import TruckDescription from './TruckDescription';
+import TruckSearch from './TruckSearch';
+import TruckItem from './truckItem';
 
 export default class App extends Component {
 
@@ -29,11 +31,10 @@ export default class App extends Component {
           <OurNav />
             <div className="row">
                 <div className="col-xs-2">
-                  <Sidebar />
+                    FILTERS
                 </div>
                 <div className="col-xs-10">
-                    Food Trucks coming!
-                    <TruckDescription/>
+                    <TruckSearch/>
                 </div>
             </div>
             <button type="button" className="btn btn-success">Test</button>
