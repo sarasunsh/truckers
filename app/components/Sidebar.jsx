@@ -28,50 +28,6 @@ assume props passed in as follows:
     }
 */
 
-/* -=-= CSS =-=-
-
-.sidebar {
-  background-color: LightGray;
-  border: 1px;
-  border-color: Orange;
-  height: 100%;
-  overflow: auto;
-  position: fixed;
-  top: 50px; // maybe?
-  width: 250px
-}
-
-.filter-buttons {
-  display: block;
-  width: 50px;
-}
-
-.filter-buttons ul,
-.filter-buttons li {
-  list-style: none;
-}
-
-@media only and screen (max-width: 767px) {
-
-  .sidebar {
-    background-color: LightGray;
-    display: block;
-    height: 50px;
-    margin-bottom: 10px;
-    position: fixed;
-    top: 50px // maybe?
-    width: 100%;
-  }
-
-  .filter-buttons ul,
-  .filter-buttons li {
-    list-style: none;
-  }
-
-}
-
-*/
-
 export default (props) => {
 
     const { onHighRatedClick, onOpenClick, onBudgetClick, onCuisineClick } = props;
