@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 
 import Sidebar from './Sidebar';
 import OurNav from './OurNav';
+import TruckItem from './truckItem';
 import TruckDescription from './TruckDescription'
 
 export default class App extends Component {
@@ -32,7 +33,6 @@ export default class App extends Component {
                   <Sidebar />
                 </div>
                 <div className="col-xs-10">
-                    Food Trucks coming!
                     <TruckDescription/>
                 </div>
             </div>
