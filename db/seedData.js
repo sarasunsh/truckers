@@ -20,12 +20,10 @@ const cuisineNames = [
 ]
 
 const foodTruckImageURLs = [
-  'http://imgur.com/gallery/vAq3aNr',
-  'http://imgur.com/gallery/vAq3aNr',
-  'http://imgur.com/gallery/0aQAEzr',
-  'http://imgur.com/gallery/3ouPK3G',
-  'http://imgur.com/gallery/8rRfx',
-  'http://imgur.com/gallery/oYLj0'
+  'http://freevectorfinder.com/images/thumb/indian-food-logo-40391.jpg',
+  'http://freevectorfinder.com/images/thumb/mexican-food-logo-with-cactus-40800.jpg',
+  'http://freevectorfinder.com/images/thumb/mexican-food-logo-with-hat-40156.jpg',
+  'http://www.ncstatefair.org/2016/Visitor/images/web_graphics_242x200px-30.png'
 ]
 
 const foodTruckModel = casual.define('foodTruckModel', () => {
