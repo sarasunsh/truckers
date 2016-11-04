@@ -2,120 +2,103 @@
 
 import React, { Component } from 'react';
 
-// import Sidebar from './Sidebar';
+// import our sub-components
 import OurNav from './OurNav';
 import Sidebar from './Sidebar';
 import TruckSearch from './TruckSearch';
 
+// Primary Presentational Container Component for our Landing Page
 export default class AllTrucks extends Component {
 
+    // props is the entire store via Provider
     constructor (props) {
       super(props);
-      this.props = props;
-
+      this.props = props;  // add props to the class
+      // bind our class methods, i.e., click handlers
       this.onOpenClick = this.onOpenClick.bind(this);
       this.onHighRatedClick = this.onHighRatedClick.bind(this);
       this.onBudgetClick = this.onBudgetClick.bind(this);
       this.onCuisineClick = this.onCuisineClick.bind(this);
     }
 
+    /*
+      FILTERS => ['open', 'highRated', '5', '10', '15', {cuisine}]
+      {cuisine} => ['Mexican', 'Italian', 'Japanese', 'Chinese',
+                    'Spanish', 'Thai', 'Vietnamese', 'French',
+                    'Greek', 'Lebanese']
+    */
+
+    // handle click to filter for 'open' trucks
     onOpenClick = (evt) => {
-      if (this.props.filters.includes("open")) {
-        // show all trucks again
-        // call redux action to re-map the trucks array and show AllTrucks
-        // call redux action to remove open filter from state
-        dispatch(removeFilter("open"));
-        dispatch(showFilteredTrucks());
+      if (this.props.filters.includes('open')) {  // if already clicked
+        dispatch(removeFilter('open'));           // remove filter
+        dispatch(showFilteredTrucks());           // re-map trucks to show
       } else {
-        // show only open trucks
-        // call redux action to map the trucks array and show only open trucks
-        // call redux action to add open to filter array on state
-        dispatch(addFilter("open"));
-        dispatch(showFilteredTrucks());
+        dispatch(addFilter('open'));              // otherwise, add filter
+        dispatch(showFilteredTrucks());           // re-map trucks to show
       }
     }
 
+    // handle click to filter for 'highRated' trucks
     onHighRatedClick = (evt) => {
-      if (this.props.filters.includes("highRated")) {
-          dispatch(removeFilter("highRated"));
+      if (this.props.filters.includes('highRated')) {   // ^^^see above^^^
+          dispatch(removeFilter('highRated'));
           dispatch(showFilteredTrucks());
-        // show all trucks again
-        // call redux action to re-map the trucks array and show AllTrucks
-        // call redux action to remove ratings filter from state
       } else {
-        // show only open trucks
-        // call redux action to map the trucks array and show only high rated trucks
-        // call redux action to add ratings to filter array on state
-        dispatch(addFilter("highRated"));
+        dispatch(addFilter('highRated'));
         dispatch(showFilteredTrucks());
       }
     }
 
+// NOTE the following click handlers rely on information passed with
+// the click event from the button as 'value' => evt.target.value 
+
+    // handle click to filter by budget => $5, $10, $15
     onBudgetClick = (evt) => {
-      if (evt.target.value === "5") {
-        if (this.props.filters.includes("5")) {
-          // show all trucks again
-          // call redux action to re-map the trucks array and show AllTrucks
-          // call redux action to remove $5 filter from state
-          dispatch(removeFilter("5"));
+      if (evt.target.value === '5') {
+        if (this.props.filters.includes('5')) {    //^^^^^see above^^^^^^^
+          dispatch(removeFilter('5'));
           dispatch(showFilteredTrucks());
         } else {
-          // show only open trucks
-          // call redux action to map the trucks array and show only $5 trucks
-          // call redux action to add $5 to filter array on state
-          dispatch(addFilter("5"));
+          dispatch(addFilter('5'));
           dispatch(showFilteredTrucks());
         }
       }
-      else if (evt.target.value === "10") {
-        if (this.props.filters.includes("10")) {
-          // show all trucks again
-          // call redux action to re-map the trucks array and show AllTrucks
-          // call redux action to remove $10 filter from state
-          dispatch(removeFilter("10"));
+      else if (evt.target.value === '10') {
+        if (this.props.filters.includes('10')) {
+          dispatch(removeFilter('10'));
           dispatch(showFilteredTrucks());
         } else {
-          // show only open trucks
-          // call redux action to map the trucks array and show only $10 trucks
-          // call redux action to add $10 to filter array on state
-          dispatch(addFilter("10"));
+          dispatch(addFilter('10'));
           dispatch(showFilteredTrucks());
         }
       }
-      else if (evt.target.value === "15") {
-        if (this.props.filters.includes("15")) {
-          // show all trucks again
-          // call redux action to re-map the trucks array and show AllTrucks
-          // call redux action to remove $15 filter from state
-          dispatch(removeFilter("15"));
+      else if (evt.target.value === '15') {
+        if (this.props.filters.includes('15')) {
+          dispatch(removeFilter('15'));
           dispatch(showFilteredTrucks());
         } else {
-          // show only open trucks
-          // call redux action to map the trucks array and show only $15 trucks
-          // call redux action to add $15 to filter array on state
-          dispatch(addFilter("15"));
+          dispatch(addFilter('15'));
           dispatch(showFilteredTrucks());
         }
       }
     }
 
+    // handle click to filter by cuisine (one at a time)
     onCuisineClick = (evt) => {
         const cuisine = evt.target.value
-      if (this.props.filters.includes(cuisine)) {
-        // show all trucks again
-        // call redux action to re-map the trucks array and show AllTrucks
-        // call redux action to remove cuisine filter from state
+      if (this.props.filters.includes(cuisine)) {  // ^^^^^see above^^^^^^
         dispatch(removeFilter(cuisine));
         dispatch(showFilteredTrucks());
       } else {
-        // show only open trucks
-        // call redux action to map the trucks array and show only specified cuisine trucks
-        // call redux action to add cuisine to filter array on state
         dispatch(addFilter(cuisine));
         dispatch(showFilteredTrucks());
       }
     }
 
+    // render Navigation Bar (OurNav), Sidebar, and Display of Trucks (Truck Search)
+    // click handlers passed in to Sidebar
+    // store passed in to TruckSearch as props
     render() {
       <OurNav />
       <Sidebar

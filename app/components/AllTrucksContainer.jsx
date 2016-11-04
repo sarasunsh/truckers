@@ -1,15 +1,14 @@
 'use strict';
 
 import { connect } from 'react-redux';
-
 import AllTrucks from './AllTrucks';
 import { removeFilterAction, addFilterAction, showFilteredTrucksAction  } from '../reducers/filter';
 
-// const mapStateToProps = function(state) {
-//     return {
-//         trucks: 'test'
-//     }
-// }
+const mapStateToProps = state => {
+    return {
+        trucks: state.trucks
+    }
+}
 
 const mapDispatchToProps = dispatch => ({
     return {
@@ -20,6 +19,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(AllTrucks);

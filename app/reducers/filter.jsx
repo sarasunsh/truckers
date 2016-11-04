@@ -1,17 +1,21 @@
 import store from '../store'
 
+// -=-=-=-= ACTIONS =-=-=-=-
+
 const REMOVE_FILTER = "REMOVE_FILTER";
 const ADD_FILTER = "ADD_FILTER";
 const FILTER_TRUCKS = "FILTER_TRUCKS";
 
+// =-=-=-=-= ACTION-CREATORS =-=-=-=-=-
+
 export const removeFilterAction = (str) => ({
     type: REMOVE_FILTER,
-    filters:
+    filter: str
 })
 
 export const addFilterAction = (str) => ({
     type: ADD_FILTER,
-    filters
+    filter: str
 })
 
 export const showFilteredTrucksAction = () => ({
@@ -19,13 +23,21 @@ export const showFilteredTrucksAction = () => ({
     trucks
 })
 
-const reducer = (state = store.getState(), action) => {
+// -=-=-=-=-= REDUCER =-=-=-=-=-=-
+
+export default filterReducer = (state = store.getState(), action) => {
     switch(action.type){
-        case REMOVE_FILTER : {
-            return Object.assign({}, state, { action.filters })
+        case REMOVE_FILTER: {
+            let idx = state.filters.indexOf(action.filter);
+            state.filters.splice(idx, 1);
+            return state.filters;
         }
-        case ADD_FILTER : {}
-        case FILTER_TRUCKS : {}
+        case ADD_FILTER: {
+            return state.filters.push(action.filter);
+        }
+        case FILTER_TRUCKS : {
+            return state.trucks;
+        }
         default: return state
     }
 }
