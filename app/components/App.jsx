@@ -2,11 +2,10 @@
 
 import React, { Component } from 'react';
 
-// import Sidebar from './Sidebar';
+import Sidebar from './Sidebar';
 import OurNav from './OurNav';
-import TruckDescription from './TruckDescription';
 import TruckSearch from './TruckSearch';
-import TruckItem from './truckItem';
+import TruckItem from './TruckItem';
 import TruckDescription from './TruckDescription'
 import Menu from './Menu'
 

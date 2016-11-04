@@ -2,33 +2,24 @@
 
 import { connect } from 'react-redux';
 
-import App from './App';
-import { nextSong, setProgress } from '../action-creators/player';
-import { receiveAlbums } from '../action-creators/albums';
-import { receiveArtists } from '../action-creators/artists';
+import AllTrucks from './AllTrucks';
+import { removeFilterAction, addFilterAction, showFilteredTrucksAction  } from '../reducers/filter';
 
-
-const mapStateToProps = function(state) {
-    return {
-        trucks: 'test'
-    }
-}
+// const mapStateToProps = function(state) {
+//     return {
+//         trucks: 'test'
+//     }
+// }
 
 const mapDispatchToProps = dispatch => ({
-  onLoad (albums, artists) {
-    dispatch(receiveAlbums(albums));
-    dispatch(receiveArtists(artists));
-
-    AUDIO.addEventListener('ended', () => {
-      dispatch(nextSong());
-    });
-
-    AUDIO.addEventListener('timeupdate', () => {
-      dispatch(setProgress(AUDIO.currentTime / AUDIO.duration));
-    });
-  }
+    return {
+        removeFilter: (str) => { dispatch(removeFilterAction(str)) },
+        addFilter: (str) => { dispatch(addFilterAction(str)) },
+        showFilteredTrucks: () => { dispatch(showFilteredTrucksAction()) }
+    }
 });
 
 export default connect(
-    mapStateToProps
-)(App);
+    null,
+    mapDispatchToProps
+)(AllTrucks);
