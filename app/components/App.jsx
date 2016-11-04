@@ -2,10 +2,11 @@
 
 import React, { Component } from 'react';
 
-import Sidebar from './Sidebar';
+// import Sidebar from './Sidebar';
 import OurNav from './OurNav';
+import TruckDescription from './TruckDescription';
+import TruckSearch from './TruckSearch';
 import TruckItem from './truckItem';
-import TruckDescription from './TruckDescription'
 
 export default class App extends Component {
 
@@ -33,6 +34,7 @@ export default class App extends Component {
                   <Sidebar />
                 </div>
                 <div className="col-xs-12 col-sm-12 col-md-10">
+                    <TruckSearch/>
                     <TruckDescription/>
                 </div>
             </div>
