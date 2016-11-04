@@ -1,39 +1,107 @@
 .filters {
-  background-color: LightGray;
-  border: 1px;
-  border-color: Orange;
-  height: 100%;
-  overflow: auto;
+  background-color: #f8f8f8;
+  border: solid #e7e7e7;
+  border-radius: 5px;
+  border-width: 1px;
+  height: 80%;
+  margin: 0 auto;
+  overflow: visible;
   position: fixed;
-  width: 200px;
 }
 
 .filter-buttons {
   display: block;
-  width: 200px;
+  margin: 0 auto;
+  padding-top: 15px;
+  text-align: center;
 }
 
 .filter-buttons ul,
 .filter-buttons li {
   list-style: none;
-  padding: 0;
-  padding-bottom: 5px;
+  padding: 5px;
 }
 
-@media only and screen (max-width: 767px) {
+.filters-horizontal {
+  display: none;
+}
 
-  .sidebar {
-    background-color: LightGray;
-    display: block;
-    height: 50px;
-    margin-bottom: 10px;
-    position: fixed;
-    width: 100%;
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+  .filters {
+    background-color: #f8f8f8;
+    border: solid #e7e7e7;
+    border-radius: 5px;
+    border-width: 1px;
+    height: 30px;
+    margin-bottom: 20px;
+    padding: 0;
+    position: relative;;
+    overflow: auto;
+  }
+
+  .filter-buttons {
+    padding: 2px;
   }
 
   .filter-buttons ul,
   .filter-buttons li {
     list-style: none;
+    padding: 4px;
   }
 
+  .btn-responsive {
+    padding: 4px 8px;
+    font-size: 100%;
+    line-height: 1.2;
+  }
+
+  .filters-horizontal {
+    display: inline-block;;
+  }
+
+  .filters-vertical {
+    display: none;
+  }
+
+}
+
+
+@media only screen and (max-width: 767px) {
+
+  .filters {
+    background-color: #f8f8f8;
+    border: solid #e7e7e7;
+    border-radius: 5px;
+    border-width: 1px;
+    height: 30px;
+    margin-bottom: 20px;
+    padding: 0;
+    position: relative;
+  }
+
+  .filter-buttons {
+    padding: 2px;
+  }
+
+  .filter-buttons ul,
+  .filter-buttons li {
+    list-style: none;
+    padding: 4px;
+  }
+
+  .btn-responsive {
+    padding: 4px 8px;
+    font-size: 100%;
+    line-height: 1;
+  }
+
+  .filters-horizontal {
+    display: inline-block;;
+  }
+
+  .filters-vertical {
+    display: none;
+  }
 }
