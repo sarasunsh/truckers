@@ -34,7 +34,11 @@ export default class App extends Component {
                     FILTERS
                 </div>
                 <div className="col-xs-10">
+<<<<<<< HEAD
                     <TruckSearch/>
+=======
+                    <TruckDescription/>
+>>>>>>> master
                 </div>
             </div>
             <button type="button" className="btn btn-success">Test</button>

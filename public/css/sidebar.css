@@ -1,0 +1,39 @@
+.filters {
+  background-color: LightGray;
+  border: 1px;
+  border-color: Orange;
+  height: 100%;
+  overflow: auto;
+  position: fixed;
+  width: 200px;
+}
+
+.filter-buttons {
+  display: block;
+  width: 200px;
+}
+
+.filter-buttons ul,
+.filter-buttons li {
+  list-style: none;
+  padding: 0;
+  padding-bottom: 5px;
+}
+
+@media only and screen (max-width: 767px) {
+
+  .sidebar {
+    background-color: LightGray;
+    display: block;
+    height: 50px;
+    margin-bottom: 10px;
+    position: fixed;
+    width: 100%;
+  }
+
+  .filter-buttons ul,
+  .filter-buttons li {
+    list-style: none;
+  }
+
+}
