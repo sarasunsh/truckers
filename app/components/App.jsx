@@ -7,6 +7,8 @@ import OurNav from './OurNav';
 import TruckDescription from './TruckDescription';
 import TruckSearch from './TruckSearch';
 import TruckItem from './truckItem';
+import TruckDescription from './TruckDescription'
+import Menu from './Menu'
 
 export default class App extends Component {
 
@@ -36,6 +38,7 @@ export default class App extends Component {
                 <div className="col-xs-12 col-sm-12 col-md-10">
                     <TruckSearch/>
                     <TruckDescription/>
+                    <Menu />
                 </div>
             </div>
           </div>
