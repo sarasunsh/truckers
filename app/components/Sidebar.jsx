@@ -28,50 +28,6 @@ assume props passed in as follows:
     }
 */
 
-/* -=-= CSS =-=-
-
-.sidebar {
-  background-color: LightGray;
-  border: 1px;
-  border-color: Orange;
-  height: 100%;
-  overflow: auto;
-  position: fixed;
-  top: 50px; // maybe?
-  width: 250px
-}
-
-.filter-buttons {
-  display: block;
-  width: 50px;
-}
-
-.filter-buttons ul,
-.filter-buttons li {
-  list-style: none;
-}
-
-@media only and screen (max-width: 767px) {
-
-  .sidebar {
-    background-color: LightGray;
-    display: block;
-    height: 50px;
-    margin-bottom: 10px;
-    position: fixed;
-    top: 50px // maybe?
-    width: 100%;
-  }
-
-  .filter-buttons ul,
-  .filter-buttons li {
-    list-style: none;
-  }
-
-}
-
-*/
-
 export default (props) => {
 
     const { onHighRatedClick, onOpenClick, onBudgetClick, onCuisineClick } = props;
@@ -90,17 +46,17 @@ export default (props) => {
     ];
 
     return (
-      <div className="sidebar">
+      <div className="filters">
         <div className="filter-buttons">
-          <ul>
-            <li><Button onClick={() => onOpenClick}>Open Now</Button></li>
+          <ul className="filters-vertical">
+            <li><Button className="btn-responsive" onClick={() => onOpenClick}>Open Now</Button></li>
             <li><ButtonGroup onClick={() => onBudgetClick}>
-              <Button value="5">$5</Button>
-              <Button value="10">$10</Button>
-              <Button value="15">$15</Button>
+              <Button className="btn-responsive" value="5">$5</Button>
+              <Button className="btn-responsive" value="10">$10</Button>
+              <Button className="btn-responsive" value="15">$15</Button>
             </ButtonGroup></li>
-            <li><Button onClick={() => onHighRatedClick}>Highest Rated</Button></li>
-            <li><DropdownButton title="Cuisine" onClick={() => onCuisineClick}>
+            <li><Button className="btn-responsive" onClick={() => onHighRatedClick}>Highest Rated</Button></li>
+            <li><DropdownButton className="btn-responsive" title="Cuisine" onClick={() => onCuisineClick}>
               {cuisines.map((cuisine, idx) => {
                 return (
                   <MenuItem key={idx} value={cuisine}> {cuisine} </MenuItem>
@@ -108,6 +64,22 @@ export default (props) => {
               })}
             </DropdownButton></li>
           </ul>
+          <div className="filters-horizontal">
+            <Button className="btn-responsive" onClick={() => onOpenClick}>Open Now</Button>
+            <ButtonGroup onClick={() => onBudgetClick}>
+              <Button className="btn-responsive" value="5">$5</Button>
+              <Button className="btn-responsive" value="10">$10</Button>
+              <Button className="btn-responsive" value="15">$15</Button>
+            </ButtonGroup>
+            <Button className="btn-responsive" onClick={() => onHighRatedClick}>Highest Rated</Button>
+            <DropdownButton className="btn-responsive" title="Cuisine" onClick={() => onCuisineClick}>
+              {cuisines.map((cuisine, idx) => {
+                return (
+                  <MenuItem key={idx} value={cuisine}> {cuisine} </MenuItem>
+                )
+              })}
+            </DropdownButton>
+          </div>
         </div>
       </div>
     )

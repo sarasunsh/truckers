@@ -2,8 +2,10 @@
 
 import React, { Component } from 'react';
 
-import Sidebar from './Sidebar';
+// import Sidebar from './Sidebar';
 import OurNav from './OurNav';
+import TruckDescription from './TruckDescription';
+import TruckSearch from './TruckSearch';
 import TruckItem from './truckItem';
 import TruckDescription from './TruckDescription'
 import Menu from './Menu'
@@ -30,15 +32,15 @@ export default class App extends Component {
           <div id="main" className="container-fluid">
           <OurNav />
             <div className="row">
-                <div className="col-xs-2">
+                <div className="col-xs-12 col-sm-12 col-md-2">
                   <Sidebar />
                 </div>
-                <div className="col-xs-10">
+                <div className="col-xs-12 col-sm-12 col-md-10">
+                    <TruckSearch/>
                     <TruckDescription/>
                     <Menu />
                 </div>
             </div>
-            <button type="button" className="btn btn-success">Test</button>
           </div>
         );
     }
