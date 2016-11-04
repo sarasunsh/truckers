@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Well, Button, Glyphicon } from 'react-bootstrap';
 import axios from 'axios';
-import TruckItem from './TruckItem';
+import TruckItem from '../TruckItem';
 
 
 export default class TruckDescription extends Component {
@@ -27,7 +27,9 @@ export default class TruckDescription extends Component {
                 {
                     this.state.trucks.map( truck => (
                         <div className="col-xs-4" key={truck.id}>
+
                             <TruckItem
+                                id={truck.id}
                                 name={truck.name}
                                 cuisine={truck.cuisine}
                                 image={truck.image}
@@ -40,5 +42,4 @@ export default class TruckDescription extends Component {
         )
     }
 }
-
 
