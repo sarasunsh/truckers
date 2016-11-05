@@ -26,6 +26,24 @@ customTruckRoutes.param('itemID', function(req, res, next, itemID){
 
 /// GET REQUESTS -------------------------------------------------------------
 
+/* GETTER method for average price
+FoodTruck.findAll(
+  include: [(
+    model: MenuItems,
+    where: { food_truck_id: Sequelize.col('foodTruck.id') },
+    attributes: [[Sequelize.fn('AVG', Sequelize.col('price')), 'avgPrice']]
+  )]
+  )
+  .then(trucks => {
+    trucks = trucks.map(truck => {
+      return truck.avgPrice = truck.MenuItems.avgPrice    <---- I think this works, but not sure!
+    });
+    res.json(trucks);
+  })
+  .catch(next)
+
+*/
+
 // Route for main page -- get all trucks
 customTruckRoutes.get('/', function(req, res, next) {
     FoodTruck.findAll()
