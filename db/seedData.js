@@ -33,7 +33,9 @@ const foodTruckModel = casual.define('foodTruckModel', () => {
     location: casual.address,
     website: casual.url,
     cuisine: casual.random_element(cuisineNames),
-    image: casual.random_element(foodTruckImageURLs)
+    image: casual.random_element(foodTruckImageURLs),
+    isOpen: casual.coin_flip,
+    rating: casual.integer(1, 5)
   }
 })
 
