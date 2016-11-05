@@ -3,35 +3,16 @@
 import React from 'react';
 import { Button, ButtonGroup, DropdownButton, MenuItem } from 'react-bootstrap';
 
-/* -=-= REDUX =-=-
-
-assume props passed in as follows:
- 1. onHighRatedClick = (evt) => {
-      // redux dispatch to change visibility to false for non-highRated
-    }
- 2. onOpenClick = (evt) => {
-      // redux dispatch to change visibility to false for not open
-    }
- 3. onBudgetClick = (evt) => {
-      if (evt.target.value === 5) {
-        // redux dispatch to change visibility to false for >$5
-      }
-      else if (evt.target.value === 10) {
-        // redux dispatch to change visibility to false for >$10
-      }
-      else if (evt.target.value === 15) {
-       // redux dispatch to change visibility to false for >$15
-      }
-    }
-  4. onCuisineClick = (evt) => {
-      // redux dispatch to change visibility to false for non-cuisine type
-    }
-*/
-
+// This component provides the user interface (buttons) for filtering trucks
+// on the main presentational component (TruckSearch) for the landing page.
+// The container passes it all necessary click handlers to dispatch the
+// selected truck filter.
 export default (props) => {
 
+    // declare click handlers from container-provided props
     const { onHighRatedClick, onOpenClick, onBudgetClick, onCuisineClick } = props;
 
+    // available cuisines to filter
     const cuisines = [
       'Mexican',
       'Italian',
@@ -45,6 +26,11 @@ export default (props) => {
       'Lebanese'
     ];
 
+    // NOTE that these react-bootstrap buttons also have a special class
+    // called 'btn-responsive' to phase the buttons to a smaller size for
+    // smaller viewscreens and for when the filter sidebar collapses to a
+    // horizontal bar underneath the navbar (that collapsed bar is coded
+    // beneath the primary sidebar html)
     return (
       <div className="filters">
         <div className="filter-buttons">
@@ -64,6 +50,7 @@ export default (props) => {
               })}
             </DropdownButton></li>
           </ul>
+  {/* -=-=-= BEGIN COLLAPSED SIDEBAR CODE =-=-=-=-=- */}
           <div className="filters-horizontal">
             <Button className="btn-responsive" onClick={() => onOpenClick}>Open Now</Button>
             <ButtonGroup onClick={() => onBudgetClick}>

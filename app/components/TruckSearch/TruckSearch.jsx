@@ -1,31 +1,40 @@
 import React, { Component } from 'react';
 import { Well, Button, Glyphicon } from 'react-bootstrap';
+<<<<<<< HEAD:app/components/TruckSearch/TruckSearch.jsx
 import axios from 'axios';
 import TruckItem from '../TruckItem';
+=======
+import TruckItem from './TruckItem';
+>>>>>>> alltrucks-component-#68:app/components/TruckSearch.jsx
 
+/* Presentation Component showing all Trucks or filtered Trucks
 
-export default class TruckDescription extends Component {
+  trucks = [ {truck1}, {truck2}, ... ]
+  truck = {
+    id: 1,
+    name: 'Taco Truck',
+    cuisine: 'Mexican',
+    image: 'http://imgur.com/taco.png',
+    description: 'We love tacos!'
+    display: 'block' || 'none'
+  }
+
+  NOTE that the 'display' property on truck is a construct of our
+  action-creators to allow our reducers to filter only those trucks
+  we wish to present in this component
+*/
+export default class TruckSearch extends Component {
     constructor (props) {
         super(props);
-        this.state = {trucks: []};
+        const { trucks } = props;  // passed via mapStateToProps from Provider Store
     }
 
-    componentDidMount () {
-        axios.get('/api/trucks')
-        .then(res => this.onLoad(res.data))
-        .catch(err => console.log(err))
-    }
-
-    onLoad (trucks) {
-        this.setState({ trucks });
-    }
-
+    // render blocks of trucks passed from the store
     render() {
-        console.log('state', this.state.trucks)
         return (
             <div className="row">
                 {
-                    this.state.trucks.map( truck => (
+                    trucks.map( truck => (
                         <div className="col-xs-4" key={truck.id}>
 
                             <TruckItem
@@ -34,6 +43,7 @@ export default class TruckDescription extends Component {
                                 cuisine={truck.cuisine}
                                 image={truck.image}
                                 description={truck.description}
+                                display={truck.display}
                             />
                         </div>
                     ))
@@ -42,4 +52,7 @@ export default class TruckDescription extends Component {
         )
     }
 }
+<<<<<<< HEAD:app/components/TruckSearch/TruckSearch.jsx
 
+=======
+>>>>>>> alltrucks-component-#68:app/components/TruckSearch.jsx
