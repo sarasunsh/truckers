@@ -25,7 +25,7 @@ export const showFilteredTrucksAction = () => ({
 // -=-=-=-=-= REDUCER =-=-=-=-=-=-
 
 // check whether a truck matches our filters
-const checkFilters(truck, filters) => {
+const checkFilters = (truck, filters) => {
   let truckProps = [];
   if (truck.isOpen) { truckProps.push('open')};  // filter is 'open'
   if (truck.rating >= 4) { truckProps.push('highRated') } // filter is 'highRated'

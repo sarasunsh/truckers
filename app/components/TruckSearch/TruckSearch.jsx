@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { Well, Button, Glyphicon } from 'react-bootstrap';
-<<<<<<< HEAD:app/components/TruckSearch/TruckSearch.jsx
 import axios from 'axios';
 import TruckItem from '../TruckItem';
-=======
-import TruckItem from './TruckItem';
->>>>>>> alltrucks-component-#68:app/components/TruckSearch.jsx
 
 /* Presentation Component showing all Trucks or filtered Trucks
 
@@ -52,7 +48,3 @@ export default class TruckSearch extends Component {
         )
     }
 }
-<<<<<<< HEAD:app/components/TruckSearch/TruckSearch.jsx
-
-=======
->>>>>>> alltrucks-component-#68:app/components/TruckSearch.jsx
