@@ -12,19 +12,18 @@ import { Well, Button, Glyphicon } from 'react-bootstrap';
 // - thumbnail image should resize itself appropriately
 // - remove border from favorite icon
 // - replace 'star rating' with actual stars
-// =-0n b
 
 export default class TruckDescription extends Component {
 
   render() {
-
+    const { truck } = this.props
     return (
       <Well className="clearfix">
         <row>
 
           <div className="col-xs-4">
 
-            <img className="img-thumbnail" src="http://static.wixstatic.com/media/6623dd_e46933fec7154f9ab2987d4f547404ca~mv2.jpg_256" />
+            <img className="img-thumbnail" src={truck.image} />
 
           </div>
 
@@ -32,7 +31,7 @@ export default class TruckDescription extends Component {
 
             <row>
               <div className="col-xs-10">
-                <h3>The Pizza Truck</h3>
+                <h3>{truck.name}</h3>
               </div>
               <div className="col-xs-2">
                 <Button type="submit"><Glyphicon glyph="star-empty" /></Button>
@@ -47,15 +46,12 @@ export default class TruckDescription extends Component {
 
             <row>
               <div className="col-xs-12">
-                <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et tincidunt tellus. Etiam nunc diam, sagittis in venenatis ac, mattis sed velit. Vestibulum bibendum velit vel ullamcorper venenatis....</h5>
+                <h5>{truck.description}</h5>
               </div>
             </row>
             <row >
               <div className="col-xs-10">
-                <h6>
-                  10 Hanover Square
-                  New York, New York 10015
-                </h6>
+                <h6> {truck.location} </h6>
               </div>
               <div className="col-xs-2">
                 <Button type="submit"><Glyphicon glyph="envelope" /></Button>

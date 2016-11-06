@@ -2,60 +2,63 @@ import store from '../store'
 
 // -=-=-=-= ACTIONS =-=-=-=-
 
-const REMOVE_FILTER = "REMOVE_FILTER";
-const ADD_FILTER = "ADD_FILTER";
-const FILTER_TRUCKS = "FILTER_TRUCKS";
+const TOGGLE_OPEN = "TOGGLE_OPEN";
+const TOGGLE_RATED = "TOGGLE_RATED";
+const CHANGE_CUISINE = "CHANGE_CUISINE"
+const CHANGE_PRICE = "CHANGE_PRICE"
 
 // =-=-=-=-= ACTION-CREATORS =-=-=-=-=-
 
-export const removeFilterAction = (str) => ({
-    type: REMOVE_FILTER,
-    filter: str
-})
+export const toggleFilterAction = function(str) {
+    switch (str){
+        case 'open_now': return { type: TOGGLE_OPEN }
+        case 'highRated': return { type: TOGGLE_RATED }
+        default: return;
+    }
+}
 
-export const addFilterAction = (str) => ({
-    type: ADD_FILTER,
-    filter: str
-})
+export const priceFilterAction = function(price){
+    return {
+        type: CHANGE_PRICE,
+        price
+    }
+}
 
-export const showFilteredTrucksAction = () => ({
-    type: FILTER_TRUCKS
-})
+export const cuisineFilterAction = function(cuisine){
+    return {
+        type: CHANGE_CUISINE,
+        cuisine
+    }
+
+}
 
 // -=-=-=-=-= REDUCER =-=-=-=-=-=-
 
-// check whether a truck matches our filters
-const checkFilters = (truck, filters) => {
-  let truckProps = [];
-  if (truck.isOpen) { truckProps.push('open')};  // filter is 'open'
-  if (truck.rating >= 4) { truckProps.push('highRated') } // filter is 'highRated'
-  // now we manually add props to avoid unintentional matches with non-filter prop values
-  truckProps = [...truckProps, truck['cuisine'], truck['avgPrice']];
-  return (truckProps.some(truckProp => {        // iterate over filterable props
-    return filters.indexOf(truckProp) >= 0      // return true if prop hits a current filter
-  }))
+// Do we want to reset this once the user navigates away to an individual truck?
+const initialFilter = {
+    'open_now': false,
+    'maxPrice': false,
+    'highRated': false,
+    'cuisine': false
 }
 
 // reduce our filter actions
-export default filterReducer = (state = store.getState(), action) => {
-    switch(action.type){
-        case REMOVE_FILTER: {
-            let idx = state.filters.indexOf(action.filter);  // find index of filter to remove
-            state.filters.splice(idx, 1);                    // splice it out
-            return state.filters;                            // return the modified filters array
-        }
-        case ADD_FILTER: {
-            return ([...state.filters, action.filter]);      // concat new filter
-        }
-        case FILTER_TRUCKS : {
-            return state.trucks.map(truck => {               // iterate over filters
-              if (checkFilters(truck, state.filters)) {      // check if truck matches a filter
-                truck.display = 'block';                     // if yes, show
-              } else {
-                truck.display = 'none';                      // if not, hide
-              }
-            })
-        }
-        default: return state;
+export default function filterReducer(state=initialFilter, action){
+    switch (action.type){
+        case TOGGLE_OPEN: return Object.assign({}, state, { 'open_now': !state['open_now']})
+        case TOGGLE_RATED: return Object.assign({}, state, { 'highRated': !state['highRated']})
+        case CHANGE_PRICE:
+            if (action.price === state.maxPrice){
+                return Object.assign({}, state, { 'maxPrice': false})
+            } else {
+                return Object.assign({}, state, { 'maxPrice': action.price})
+            }
+        case CHANGE_CUISINE:
+            if (action.cuisine === state.cuisine){
+                return Object.assign({}, state, { 'cuisine': false})
+            } else {
+                return Object.assign({}, state, { 'cuisine': action.cuisine})
+            }
+        default: return state
     }
 }
