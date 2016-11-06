@@ -11,11 +11,6 @@ export default class TruckItem extends Component {
 
   render() {
 
-    // this style variable controls whether the truck will be displayed
-    // or has been filtered out (i.e., display: none)
-    const truckStyle = {
-      display: this.props.display
-    };
     const h4CuisineStyle = {
         color: '#FFA500'
     };
@@ -25,7 +20,7 @@ export default class TruckItem extends Component {
           <Row>
           <Col xs={6} md={4}>
             <Link to={`/trucks/${this.props.id}`}>
-              <Thumbnail style={truckStyle} src={this.props.image} alt="242x200">
+              <Thumbnail src={this.props.image} alt="242x200">
                 <h3>{this.props.name}</h3>
                 <h4 style={h4CuisineStyle}>{this.props.cuisine}</h4>
                 <p>{this.props.description}</p>

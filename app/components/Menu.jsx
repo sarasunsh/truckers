@@ -9,24 +9,25 @@ const dummyMenuItem = {
 }
 
 
-export default class OurNav extends Component {
-  constructor() {
-    super()
-    this.state = {};
-  }
-
+export default class Menu extends Component {
 
   render() {
-
+    console.log(this.props.menu)
     return (
         <div>
-            <h2>Our Delicious Menu (menu header)</h2>
+            <h2>Menu</h2>
             <Panel collapsible defaultExpanded header="APPETIZERS (Menu Section Heading)">
-              Some default panel content here. (maybe copy about how delicious the appetizers are...)
+              Some default panel content here.
               <ListGroup fill>
-                <ListGroupItem>
-                    <MenuItem />
-                </ListGroupItem>
+                {this.props.menu.map(item => (
+                    <ListGroupItem>
+                        <MenuItem item={item}/>
+                    </ListGroupItem>
+                  )
+
+                )}
+
+
               </ListGroup>
             </Panel>
         </div>
