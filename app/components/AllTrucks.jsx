@@ -13,10 +13,10 @@ export default class AllTrucks extends Component {
     render() {
       return (
           <div id="main" className="container-fluid">
-            <div className="col-xs-2">
+            <div className="col-md-2 col-sm-12 col-xs-12">
                 <FakeSidebarContainer />
             </div>
-            <div className="col-xs-10">
+            <div className="col-md-10 col-sm-12 col-xs-12">
                 <TruckSearchContainer />
             </div>
           </div>

@@ -1,4 +1,6 @@
-export const pullFilters = function(filters){
+import axios from 'axios'
+
+export const pullFilters = (filters) => {
     const filterArr = [];
     for (const key in filters){
         if (filters.hasOwnProperty(key)){
@@ -11,7 +13,7 @@ export const pullFilters = function(filters){
 }
 
 // This can easily be combined with the above function to reduce time complexity
-export const checkFilters = function(truck, filterArr, filters){
+export const checkFilters = (truck, filterArr, filters) => {
     for (var i = 0; i < filterArr.length; i++) {
         if (filterArr[i] === 'open_now' && !truck.isOpen){
             return false;

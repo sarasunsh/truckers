@@ -6,7 +6,7 @@ import axios from 'axios';
 const LOAD_CURRENT_TRUCK = "LOAD_CURRENT_TRUCK";
 
 // ACTION-CREATORS--------------------------------------------------------
-export const loadCurrentTruck = function(fetchedTruck){
+export const loadCurrentTruck = (fetchedTruck) => {
     return {
         type: LOAD_CURRENT_TRUCK,
         loadedTruck: fetchedTruck
@@ -14,8 +14,8 @@ export const loadCurrentTruck = function(fetchedTruck){
 }
 
 // DISPATCHERS/THUNKS --------------------------------------------------------
-export const fetchSingleTruckFromServer = function(truckID){
-    const thunk = function(dispatch) {
+export const fetchSingleTruckFromServer = (truckID) => {
+    const thunk = (dispatch) => {
         const getTruck = axios.get(`/api/trucks/${truckID}`);
         const getMenu = axios.get(`/api/trucks/${truckID}/menu`);
 
@@ -31,9 +31,11 @@ export const fetchSingleTruckFromServer = function(truckID){
 }
 
 // REDUCER --------------------------------------------------------
-export default function singleTruckReducer(state={menu:[]}, action){
-    switch (action.type){
-        case LOAD_CURRENT_TRUCK: return  action.loadedTruck
+const singleTruckReducer = (state={menu:[]}, action) => {
+    switch (action.type) {
+        case LOAD_CURRENT_TRUCK: return action.loadedTruck
         default: return state
     }
 }
+
+export default singleTruckReducer;
