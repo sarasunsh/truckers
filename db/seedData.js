@@ -49,15 +49,15 @@ const menuItemModel = casual.define('menuItemModel', () => {
   }
 })
 
-const userModel = casual.define('userModel', () => {
-  return {
-    name: casual.full_name,
-    email: casual.email,
-    isVendor: casual.coin_flip
-    // ,
-    // food_truck_id: casual.integer(1, NUMBER_OF_FOOD_TRUCKS)
-  }
-})
+// const userModel = casual.define('userModel', () => {
+//   return {
+//     name: casual.full_name,
+//     email: casual.email,
+//     isVendor: casual.coin_flip
+//     // ,
+//     // food_truck_id: casual.integer(1, NUMBER_OF_FOOD_TRUCKS)
+//   }
+// })
 
 const dataGenerator = (times, generator) => {
   let data = [];
@@ -71,4 +71,4 @@ const dataGenerator = (times, generator) => {
 
 exports.foodTrucks = dataGenerator(NUMBER_OF_FOOD_TRUCKS, casual._foodTruckModel);
 exports.menuItems = dataGenerator(NUMBER_OF_MENU_ITEMS, casual._menuItemModel);
-exports.users = dataGenerator(NUMBER_OF_USERS, casual._userModel);
+// exports.users = dataGenerator(NUMBER_OF_USERS, casual._userModel);
