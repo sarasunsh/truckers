@@ -14,6 +14,9 @@ const MenuItem = db.define('menuItems', {
   price: {
     type: Sequelize.INTEGER,
     allowNull: false
+  },
+  type: {
+    type: Sequelize.STRING
   }
 })
 

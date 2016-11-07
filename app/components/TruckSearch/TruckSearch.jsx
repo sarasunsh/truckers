@@ -1,33 +1,20 @@
 import React, { Component } from 'react';
-import { Well, Button, Glyphicon } from 'react-bootstrap';
-import axios from 'axios';
 import TruckItem from '../TruckItem';
+import { pullFilters, checkFilters } from '../../utils';
 
-
-export default class TruckDescription extends Component {
-    constructor (props) {
-        super(props);
-        this.state = {trucks: []};
-    }
-
-    componentDidMount () {
-        axios.get('/api/trucks')
-        .then(res => this.onLoad(res.data))
-        .catch(err => console.log(err))
-    }
-
-    onLoad (trucks) {
-        this.setState({ trucks });
-    }
-
+// Presentation Component showing all Trucks or filtered Trucks
+export default class TruckSearch extends Component {
     render() {
-        console.log('state', this.state.trucks)
+        // Utility functions are used to filter out trucks that do not fit the user's selected filters
+        const { trucks, filters } = this.props;
+        const filterArr = pullFilters(filters);
+        const filterTrucks = trucks.filter(truck => checkFilters(truck, filterArr, filters));
+
         return (
             <div className="row">
                 {
-                    this.state.trucks.map( truck => (
+                    filterTrucks.map( truck => (
                         <div className="col-xs-4" key={truck.id}>
-
                             <TruckItem
                                 id={truck.id}
                                 name={truck.name}
@@ -42,4 +29,3 @@ export default class TruckDescription extends Component {
         )
     }
 }
-
