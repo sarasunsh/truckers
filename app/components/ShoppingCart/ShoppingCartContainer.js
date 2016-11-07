@@ -2,14 +2,17 @@
 
 import { connect } from 'react-redux';
 import ShoppingCart from './ShoppingCart';
-import {addItem, removeItem, clearCart, assignFoodTruckID} from '../../reducers/shoppingCartReducer';
+import {addItem, removeItem, clearCart, assignFoodTruckID, sendOrderToServerThunk} from '../../reducers/shoppingCartReducer';
 
 // assume that state has properties:
 // 1. store.currentTruck.menu = [{id, name, description, price}, {...}]
 // 2. store.currentOrders = [{menuItem, quantity}, {menuItem, quantity}, {menuItem, quantity}]
 
 const mapStateToProps = state => ({
-	currentOrders: state.shoppingCart
+	currentOrders: state.shoppingCart,
+	// userID: state.auth.id,
+	// foodTruckID: state.currentTruck
+
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -24,6 +27,10 @@ const mapDispatchToProps = dispatch => ({
 	},
 	assignFoodTruckID: function(id){
 		dispatch(assignFoodTruckID(id));
+	},
+	sendOrderToServer: function(orderObject){
+		const thunk = sendOrderToServerThunk(orderObject);
+		dispatch(thunk);
 	}
 });
 

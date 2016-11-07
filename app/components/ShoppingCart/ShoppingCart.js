@@ -18,11 +18,22 @@ export default class ShoppingCart extends Component {
     }
 
     handleRemoveItem(orderItem){
+        console.log("removing")
+        console.log(orderItem)
         this.props.removeItem(orderItem)
     }
 
     handleAddItem(orderItem){
         this.props.addItem(orderItem)
+    }
+
+    submitOrderToServer(){
+        let orderObject = {
+            // userID: this.props.userID,
+
+        }
+
+        this.props.submitOrderToServer(orderObject);
     }
 
     render() {

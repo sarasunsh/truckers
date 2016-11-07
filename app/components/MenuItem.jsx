@@ -14,12 +14,12 @@ export default class MenuItem extends Component {
         return (
                 <Col xs={12} md={6} className="clearfix">
                     <Well className="clearfix">
-                        <Col xs={9}>
+                        <Col xs={8}>
                             <h4 style={cssBrandOrange}>{item.name}</h4>
                             <h5>{item.description}</h5>
                         </Col>
-                        <Col xs={3}>
-                            <span>{item.price}</span>
+                        <Col xs={4}>
+                            <span>{`$${item.price.toFixed(2)}`}</span>
                             <Button className="pull-right" onClick={()=>handleAddItem(item)}><Glyphicon glyph="plus" /></Button>
                         </Col>
                     </Well>
