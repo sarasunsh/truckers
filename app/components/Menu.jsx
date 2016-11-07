@@ -2,17 +2,11 @@ import React, { Component } from 'react';
 import { Panel, ListGroup, ListGroupItem } from 'react-bootstrap';
 import MenuItem from './MenuItem'
 
-const dummyMenuItem = {
-    name: "Tacos al Pastor",
-    description: "The tastiest tacos you've ever had in your life. Guac is totally extra $$$ tho...",
-    price: "$8.00"
-}
 
 
 export default class Menu extends Component {
 
   render() {
-    console.log(this.props.menu)
     return (
         <div>
             <h2>Menu</h2>
