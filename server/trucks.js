@@ -46,8 +46,27 @@ FoodTruck.findAll(
 
 // Route for main page -- get all trucks
 customTruckRoutes.get('/', function(req, res, next) {
-    FoodTruck.findAll()
-    .then(trucks => res.json(trucks))
+    FoodTruck.findAll({
+        include: [{
+            model: MenuItem,
+            attributes: ['price']          // grab price for each menu item
+        }]
+    })
+    .then(trucks => {
+      /* the below is admittedly funky and gives you an object array of
+         [{{'truck': {all truck props}}, {'avgPrice': $8.32}}, ... ]
+         but Sequelize continually foiled my attempts to create a merged object
+         at this juncture or aggregate above. It's bleh.
+      */
+        const pricedTrucks = trucks.map((truck) => {
+            let prices = truck.menuItems.map(item => {
+                return item['price']                    // prices array
+            })                                          // to reduce \/ for avg
+            let avgPrice = (prices.reduce((x, y) => { return x + y }) / prices.length).toFixed(2)
+            return { truck, avgPrice: avgPrice }        // and add as an object to send with truck
+        })
+        res.json(pricedTrucks)
+    })
     .catch(next);
 });
 

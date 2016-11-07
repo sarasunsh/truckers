@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import { Button, ButtonGroup, DropdownButton, MenuItem } from 'react-bootstrap';
+import { Button, ButtonGroup, ButtonToolbar, SplitButton, MenuItem } from 'react-bootstrap';
 
 
 
@@ -25,34 +25,91 @@ export default (props) => {
     console.log('filters', filters)
 
     return (
-      <div className="filters">
-        <div className="filter-buttons">
-          <ul className="filters-vertical">
-            <li><Button className="btn-responsive" className={filters['open_now'] ? "active" : ""} onClick={() => toggleFilter('open_now')}>Open Now</Button></li>
-            <li><Button className="btn-responsive" className={filters['highRated'] ? "active" : ""} onClick={() => toggleFilter('highRated')}>Highest Rated</Button></li>
-            <h4> Maximum Price </h4>
-            {prices.map((price) => (
-                <li  key={price}>
-                    <Button
-                        className="btn-responsive"
-                        className={(filters['maxPrice'] && filters['maxPrice'] === price) ? "active" : ""}
-                        onClick={() => priceFilter(price)}>${price}
-                    </Button>
-                </li>
-                )
-            )}
-            <h4> Cuisines </h4>
-            {cuisines.map((cuisine) => (
-                <li key={cuisine}>
-                    <Button
-                        className="btn-responsive"
-                        className={filters['cuisine'] === cuisine ? "active" : ""}
-                        onClick={() => cuisineFilter(cuisine)}>{cuisine}
-                    </Button>
-                </li>
-                )
-            )}
-          </ul>
+        <div className="filters">
+            <div className="filter-buttons">
+                <ul className="filters-vertical">
+                    <li>
+                        <Button
+                            className={filters['open_now'] ? "active" : ""}
+                            onClick={() => toggleFilter('open_now')}>
+                            Open Now
+                        </Button>
+                    </li>
+                    <li>
+                        <Button
+                            className={filters['highRated'] ? "active" : ""}
+                            onClick={() => toggleFilter('highRated')}>
+                            Highest Rated
+                        </Button>
+                    </li>
+                    <span> Budget </span>
+                    <li>
+                        <ButtonGroup>
+                            {prices.map((price) => (
+                                <Button
+                                      key={price}
+                                      className={(filters['maxPrice'] && filters['maxPrice'] === price) ? "active" : ""}
+                                      onClick={() => priceFilter(price)}>
+                                      ${price}
+                                </Button>
+                                )
+                            )}
+                          </ButtonGroup>
+                    </li>
+                    <li>
+                        <SplitButton
+                            title="Cuisine"
+                            id="cuisine">
+                            {cuisines.map((cuisine) => (
+                                  <MenuItem
+                                        key={cuisine}
+                                        id={cuisine}
+                                        className={filters['cuisine'] === cuisine ? "active" : ""}
+                                        onSelect={() => cuisineFilter(cuisine)}>{cuisine}
+                                  </MenuItem>
+                                )
+                            )}
+                        </SplitButton>
+                    </li>
+              </ul>
+          {/* Filters flip to top of screen at 989px */}
+              <ButtonToolbar className="filters-horizontal">
+                  <ButtonGroup>
+                      <Button
+                          className={filters['open_now'] ? "active" : ""}
+                          onClick={() => toggleFilter('open_now')}>
+                          Open Now
+                      </Button>
+                      <Button
+                          className={filters['highRated'] ? "active" : ""}
+                          onClick={() => toggleFilter('highRated')}>
+                          Highest Rated
+                      </Button>
+                  </ButtonGroup>
+                  <ButtonGroup>
+                      {prices.map((price) => (
+                            <Button
+                                  key={price}
+                                  className={(filters['maxPrice'] && filters['maxPrice'] === price) ? "active" : ""}
+                                  onClick={() => priceFilter(price)}>${price}
+                            </Button>
+                          )
+                      )}
+                  </ButtonGroup>
+                  <SplitButton
+                      title="Cuisine"
+                      id="cuisine">
+                      {cuisines.map((cuisine) => (
+                            <MenuItem
+                                  key={cuisine}
+                                  id={cuisine}
+                                  className={filters['cuisine'] === cuisine ? "active" : ""}
+                                  onSelect={() => cuisineFilter(cuisine)}>{cuisine}
+                            </MenuItem>
+                          )
+                      )}
+                  </SplitButton>
+              </ButtonToolbar>
         </div>
       </div>
     )
