@@ -10,8 +10,15 @@ const fullLengthStyling = {
 // we have access to currentOrders, [{menuItem, quantity}, {menuItem, quantity}, {menuItem, quantity}]
 
 export default (props) => {
-    handleAddItem(){
-        this.props
+
+    
+
+    function handleRemoveItem(orderItem){
+        this.props.removeItem(orderItem)
+    }
+
+    function handleAddItem(orderItem){
+        this.props.addItem(orderItem)
     }
 
 
@@ -19,13 +26,13 @@ export default (props) => {
         <Panel header="Shopping Cart" style={fullLengthStyling}>
             <Table responsive>
                 {
-                    this.props.currentOrders.map(orderItem=>{
+                    props.currentOrders.map(orderItem=>{
                         return(
                             <tr>
                                 <td>
-                                    <Glyphicon glyph="minus-sign" />
+                                    <Glyphicon glyph="minus-sign" onClick={handleRemoveItem(orderItem.menuItem)}/>
                                         {orderItem.quantity}
-                                    <Glyphicon glyph="plus-sign" />
+                                    <Glyphicon glyph="plus-sign" onClick={handleAddItem(orderItem.menuItem)}/>
                                 </td>
                                 <td>
                                     {orderItem.menuItem.name}
@@ -43,7 +50,7 @@ export default (props) => {
                     <td>Item Subtotal</td>
                     <td>
                         {
-                            `$${this.props.currentOrders.reduce((prev, curr)=>{
+                            `$${props.currentOrders.reduce((prev, curr)=>{
                                 const rowCost = curr.menuItem.price * curr.quantity;
                                 return prev + rowCost;
                             }, 0)}`

@@ -4,7 +4,7 @@ import auth from './auth';
 import trucks from './trucks';
 import currentTruck from './singleTruck';
 import filters from './filter';
-import shoppingCart from './shoppingCart';
+import shoppingCart from './shoppingCartReducer';
 
 const rootReducer = combineReducers({
   auth,

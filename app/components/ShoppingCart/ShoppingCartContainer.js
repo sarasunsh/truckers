@@ -9,7 +9,7 @@ import {addItem, removeItem, clearCart, assignFoodTruckID} from '../../reducers/
 // 2. store.currentOrders = [{menuItem, quantity}, {menuItem, quantity}, {menuItem, quantity}]
 
 const mapStateToProps = state => ({
-	currentOrders: state.shoppingCart.items,
+	currentOrders: state.items,
 });
 
 const mapDispatchToProps = dispatch => ({
