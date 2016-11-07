@@ -7,9 +7,10 @@ import store from './store'
 
 // Component import
 import App from './components/App/App';
-import Login from './components/Login/Login'
-import SingleTruckContainer from './components/SingleTruck/SingleTruckContainer'
-import AllTrucks from './components/AllTrucks'
+import Login from './components/Login/Login';
+import Signup from './components/Signup/Signup';
+import SingleTruckContainer from './components/SingleTruck/SingleTruckContainer';
+import AllTrucks from './components/AllTrucks';
 
 // Dispatcher import
 import { fetchTrucksFromServer } from './reducers/trucks';
@@ -35,8 +36,9 @@ render (
                 <Route path="/trucks" component={AllTrucks} onEnter={onTrucksEnter}/>
                 <Route path="/trucks/:truckID" component={SingleTruckContainer} onEnter={onSingleTruckEnter}/>
                 <IndexRoute component={AllTrucks}  onEnter={onTrucksEnter}/>
+                <Route path="/login" component={Login} />
+                <Route path="/signup" component={Signup} />
             </Route>
-            <Route path="/login" component={Login} />
         </Router>
     </Provider>,
     document.getElementById('main')

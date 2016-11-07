@@ -15,7 +15,7 @@ const User = db.define('users', {
   },
   isVendor: {
       type: Sequelize.BOOLEAN,
-      allowNull: false
+      defaultValue: false
   },
 
   // We support oauth, so users may or may not have passwords.

@@ -2,57 +2,30 @@
 
 const epilogue = require('./epilogue')
 const db = require('APP/db')
-const User = require('../db/models/user')
 
 const customUserRoutes = require('express').Router()
-
-// Custom routes go here.
-
-module.exports = customUserRoutes
+module.exports = customUserRoutes;
 
 // Epilogue will automatically create standard RESTful routes
 const users = epilogue.resource({
-  model: db.model('users'),
-  endpoints: ['/users', '/users/:id']
+    model: db.model('users'),
+    endpoints: ['/users', '/users/:id']
+})
+
+customUserRoutes.post('/users', (req, res, context) => {
+    users.create.write(req.body)
+})
+
+customUserRoutes.delete('/users/:id', (req, res, context) => {
+    users.delete
+        .fetch(req.params.id)
+        .write();
 })
 
 
+// Import filters from epilogue that are middleware to handle requests according to user status
 const {mustBeLoggedIn, selfOnly, forbidden} = epilogue.filters
-users.delete.auth(mustBeLoggedIn)
-users.delete.auth(selfOnly('delete'))
-// users.list.auth(forbidden('cannot list users')) //admins cannot see all users
-// users.read.auth(mustBeLoggedIn)
-
-//Epilogue does not require us to write traditional routes like line 39 downwards
-//However we should conform to our style that has been used in other route files
-//(see Issue #41 on waffle.io) 
-
-// function isAuth(req){
-//     if(req.user) return true
-//     else return res.sendStatus(403)
-// }
-//
-// router.get('/users', isAuth, function(req, res,next){})
-//
-//
-//
-// customUserRoutes.get('/:id', function(req, res, next) {
-//     User.findById(req.params.id)
-//     .then(user => {
-//         console.log("USER: ", user);
-//         res.send(user)
-//     })
-//     .catch(next);
-// })
-//
-// customUserRoutes.put('/users/:id', function(req, res, next) {
-//
-// })
-//
-// customUserRoutes.post('/users/:id', function(req, res, next) {
-//
-// })
-//
-// customUserRoutes.delete('/users/:id', function(req, res, next) {
-//
-// })
+users.delete.auth(mustBeLoggedIn) // sends 401 if user not logged in
+users.delete.auth(selfOnly('delete')) // only allows user to delete user accounts with IDs that match their own
+users.list.auth(forbidden('cannot list users')) //admins cannot see all users
+users.read.auth(mustBeLoggedIn) // can only see user details if logged in
