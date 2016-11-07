@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router'
 import { Navbar, Nav, NavItem, FormGroup, FormControl, Button, Glyphicon } from 'react-bootstrap';
 
 export default class OurNav extends Component {
@@ -13,7 +14,7 @@ export default class OurNav extends Component {
         <Navbar>
             <Navbar.Header>
                 <Navbar.Brand>
-                    <a href="#">Truckers</a>
+                    <Link to={`/`}>Truckers</Link>
                 </Navbar.Brand>
                 <Navbar.Toggle />
             </Navbar.Header>
@@ -37,11 +38,11 @@ export default class OurNav extends Component {
                       {' '}
               </Navbar.Form>
               <Nav pullRight>
-                  <NavItem eventKey={1} href="#">
+                  <NavItem eventKey={1}>
                       <Glyphicon glyph="shopping-cart" />
                   </NavItem>
-                  <NavItem eventKey={2} href="#">
-                      Log In
+                  <NavItem eventKey={2}>
+                      <Link to={`/login`}>Log In</Link>
                   </NavItem>
               </Nav>
           </Navbar.Collapse>

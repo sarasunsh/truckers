@@ -8,15 +8,15 @@ module.exports = customUserRoutes;
 
 // Epilogue will automatically create standard RESTful routes
 const users = epilogue.resource({
-  model: db.model('users'),
-  endpoints: ['/users', '/users/:id']
+    model: db.model('users'),
+    endpoints: ['/users', '/users/:id']
 })
 
-customUserRoutes.post('/users', function(req, res, context){
+customUserRoutes.post('/users', (req, res, context) => {
     users.create.write(req.body)
 })
 
-customUserRoutes.delete('/users/:id', function(req, res, context){
+customUserRoutes.delete('/users/:id', (req, res, context) => {
     users.delete
         .fetch(req.params.id)
         .write();
@@ -29,4 +29,3 @@ users.delete.auth(mustBeLoggedIn) // sends 401 if user not logged in
 users.delete.auth(selfOnly('delete')) // only allows user to delete user accounts with IDs that match their own
 users.list.auth(forbidden('cannot list users')) //admins cannot see all users
 users.read.auth(mustBeLoggedIn) // can only see user details if logged in
-

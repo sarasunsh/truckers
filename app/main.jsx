@@ -36,9 +36,9 @@ render (
                 <Route path="/trucks" component={AllTrucks} onEnter={onTrucksEnter}/>
                 <Route path="/trucks/:truckID" component={SingleTruckContainer} onEnter={onSingleTruckEnter}/>
                 <IndexRoute component={AllTrucks}  onEnter={onTrucksEnter}/>
+                <Route path="/login" component={Login} />
+                <Route path="/signup" component={Signup} />
             </Route>
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
         </Router>
     </Provider>,
     document.getElementById('main')
