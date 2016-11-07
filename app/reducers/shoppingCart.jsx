@@ -1,5 +1,6 @@
 // SHOPPING CART FORMAT
-// {
+//store.shoppingCart
+//{
 // 		foodTruckID: 12 (which food truck are we ordering from?)
 // 		items: [{menuItem, quantity}]
 // }
@@ -26,7 +27,7 @@ const clearCart = () => {
 }
 
 const assignFoodTruckID = (id) => {
-	// type: ASSIGN_FOODTRUCK_ID,
+	type: ASSIGN_FOODTRUCK_ID,
 	id
 }
 
@@ -34,20 +35,44 @@ const assignFoodTruckID = (id) => {
 const shoppingCartReducer = (state, action) => {
 	switch(action.type){
 		case ADD_ITEM:
-			
+			const newState = Object.assign({}, state)
+			const currentCart = newState.items;  //[{menuItem: blah, quantity: 4}, {menuItem, quantity}]
+			let found = false;
+			currentCart.forEach(item => {
+				if (item.menuItem === action.menuItem){
+					item.quantity++
+					found = true
+				}
+			})
+			if (found === false){
+				const obj = {menuItem: action.menuItem, quantity: 1}
+				newState.items.push(obj)
+			}
+			return newState;
 
-
-
-			return(
-				)
 		case REMOVE_ITEM:
-			return(
-				)
+			const newState = Object.assign({}, state)
+			const currentCart = newState.items;  //[{menuItem: blah, quantity: 4}, {menuItem, quantity}]
+
+			currentCart.forEach(item, index => {
+				if (item.menuItem === action.menuItem){
+					item.quantity--
+					if(item.quantity === 0){
+						currentCart.splice(index,1)
+					}
+				}
+			})
+			return newState;
+
 		case CLEAR_CART:
-			return(
-				)
+			const newState = Object.assign({}, state, {items: []})
+			return newState;
+
 		case ASSIGN_FOODTRUCK_ID:
-			return(
-				)
+			const newState = Object.assign({}, state, {foodTruckID: action.id})
+			return newState;
+
 	}
 }
+
+export default shoppingCartReducer;
