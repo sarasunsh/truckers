@@ -10,6 +10,10 @@ const fullLengthStyling = {
 // we have access to currentOrders, [{menuItem, quantity}, {menuItem, quantity}, {menuItem, quantity}]
 
 export default (props) => {
+    handleAddItem(){
+        this.props
+    }
+
 
     return (
         <Panel header="Shopping Cart" style={fullLengthStyling}>

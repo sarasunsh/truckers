@@ -12,21 +12,21 @@ const 	ADD_ITEM = "ADD_ITEM",
 		ASSIGN_FOODTRUCK_ID = "ASSIGN_FOODTRUCK_ID";
 
 // ACTION CREATORS
-const addItem = (menuItem) => {
+export const addItem = (menuItem) => {
 	type: ADD_ITEM,
 	menuItem
 }
 
-const removeItem = (menuItem) => {
+export const removeItem = (menuItem) => {
 	type: REMOVE_ITEM,
 	menuItem
 }
 
-const clearCart = () => {
+export const clearCart = () => {
 	type: CLEAR_CART
 }
 
-const assignFoodTruckID = (id) => {
+export const assignFoodTruckID = (id) => {
 	type: ASSIGN_FOODTRUCK_ID,
 	id
 }
