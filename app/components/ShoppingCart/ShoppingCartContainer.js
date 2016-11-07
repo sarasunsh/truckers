@@ -8,7 +8,7 @@ import ShoppingCart from './ShoppingCart'
 // 2. store.currentOrders = [{menuItem, quantity}, {menuItem, quantity}, {menuItem, quantity}]
 
 const mapStateToProps = state => ({
-	currentOrders
+	
 });
 
 const mapDispatchToProps = dispatch => ({
