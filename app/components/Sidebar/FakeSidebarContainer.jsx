@@ -8,19 +8,19 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = function(dispatch){
+const mapDispatchToProps = dispatch => {
     return {
-        toggleFilter: function(filter){
-            const action = toggleFilterAction(filter)
-            dispatch(action)
+        toggleFilter: (filter) => {
+            const toggleAction = toggleFilterAction(filter)
+            dispatch(toggleAction)
         },
-        priceFilter: function(price){
-            const action = priceFilterAction(price)
-            dispatch(action)
+        priceFilter: (price) => {
+            const priceAction = priceFilterAction(price)
+            dispatch(priceAction)
         },
-        cuisineFilter: function(cuisine){
-            const action = cuisineFilterAction(cuisine)
-            dispatch(action)
+        cuisineFilter: (cuisine) => {
+            const cuisineAction = cuisineFilterAction(cuisine)
+            dispatch(cuisineAction)
         }
     }
 }
@@ -28,4 +28,3 @@ const mapDispatchToProps = function(dispatch){
 export default connect(
     mapStateToProps, mapDispatchToProps
 )(FakeSidebar);
-

@@ -9,7 +9,7 @@ const CHANGE_PRICE = "CHANGE_PRICE"
 
 // =-=-=-=-= ACTION-CREATORS =-=-=-=-=-
 
-export const toggleFilterAction = function(str) {
+export const toggleFilterAction = (str) => {
     switch (str){
         case 'open_now': return { type: TOGGLE_OPEN }
         case 'highRated': return { type: TOGGLE_RATED }
@@ -17,14 +17,14 @@ export const toggleFilterAction = function(str) {
     }
 }
 
-export const priceFilterAction = function(price){
+export const priceFilterAction = (price) => {
     return {
         type: CHANGE_PRICE,
         price
     }
 }
 
-export const cuisineFilterAction = function(cuisine){
+export const cuisineFilterAction = (cuisine) => {
     return {
         type: CHANGE_CUISINE,
         cuisine
@@ -43,7 +43,7 @@ const initialFilter = {
 }
 
 // reduce our filter actions
-export default function filterReducer(state=initialFilter, action){
+const filterReducer = (state=initialFilter, action) => {
     switch (action.type){
         case TOGGLE_OPEN: return Object.assign({}, state, { 'open_now': !state['open_now']})
         case TOGGLE_RATED: return Object.assign({}, state, { 'highRated': !state['highRated']})
@@ -62,3 +62,5 @@ export default function filterReducer(state=initialFilter, action){
         default: return state
     }
 }
+
+export default filterReducer;

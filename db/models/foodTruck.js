@@ -38,18 +38,3 @@ const FoodTruck = db.define('foodTrucks', {
 });
 
 module.exports = FoodTruck
-
-// GETTER instance method for average price
-//
-// {
-//   getterMethods: {
-//     avgPrice: function() {
-//       this.getMenuItems({
-//           attributes: ['price']
-//       })
-//       .then(function(prices) {
-//           return (prices.reduce(function(x,y) { x += y}) / prices.length)
-//       })
-//     }
-//   }
-// }
