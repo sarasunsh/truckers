@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import TruckDescription from '../TruckDescription';
-import FakeShoppingCart from '../FakeShoppingCart';
-import Menu from '../Menu';
+import ShoppingCartContainer from '../ShoppingCart/ShoppingCartContainer';
+import MenuContainer from '../MenuContainer';
+import {Row, Col} from 'react-bootstrap';
 
 
 export default class SingleTruck extends Component {
-
     render() {
         return (
-            <div className="row">
-                <div className="col-xs-10">
+            <Row>
+                <Col xs={9}>
                     <TruckDescription truck={this.props.truck}/>
-                    <Menu menu={this.props.truck.menu}/>
-                 </div>
-                <div className="col-xs-2">
-                    <FakeShoppingCart />
-                </div>
-            </div>
+                    <MenuContainer menu={this.props.truck.menu}/>
+                 </Col>
+                <Col xs={3}>
+                    <ShoppingCartContainer />
+                </Col>
+            </Row>
         )
     }
 }
