@@ -12,28 +12,28 @@ const 	ADD_ITEM = "ADD_ITEM",
 		ASSIGN_FOODTRUCK_ID = "ASSIGN_FOODTRUCK_ID";
 
 // ACTION CREATORS
-export const addItem = (menuItem) => {
+export const addItem = (menuItem) => ({
 	type: ADD_ITEM,
 	menuItem
-}
+})
 
-export const removeItem = (menuItem) => {
+export const removeItem = (menuItem) => ({
 	type: REMOVE_ITEM,
 	menuItem
-}
+})
 
-export const clearCart = () => {
+export const clearCart = () => ({
 	type: CLEAR_CART
-}
+})
 
-export const assignFoodTruckID = (id) => {
+export const assignFoodTruckID = (id) => ({
 	type: ASSIGN_FOODTRUCK_ID,
 	id
-}
+})
 
 // REDUCER
 
-const initialState = {foodTruckID: null, items: []}
+const initialState = {foodTruckID: 1, items: []}
 
 const shoppingCartReducer = (state = initialState, action) => {
 	switch(action.type){

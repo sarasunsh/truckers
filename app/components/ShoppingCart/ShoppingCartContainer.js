@@ -1,7 +1,7 @@
 'use strict';
 
 import { connect } from 'react-redux';
-import ShoppingCart from './ShoppingCart'
+import ShoppingCart from './ShoppingCart';
 import {addItem, removeItem, clearCart, assignFoodTruckID} from '../../reducers/shoppingCartReducer';
 
 // assume that state has properties:
@@ -9,7 +9,7 @@ import {addItem, removeItem, clearCart, assignFoodTruckID} from '../../reducers/
 // 2. store.currentOrders = [{menuItem, quantity}, {menuItem, quantity}, {menuItem, quantity}]
 
 const mapStateToProps = state => ({
-	currentOrders: state.items,
+	currentOrders: state.shoppingCart
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -27,4 +27,4 @@ const mapDispatchToProps = dispatch => ({
 	}
 });
 
-export default connect(mapStateToProps, mapStateToProps)(ShoppingCart);
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCart);

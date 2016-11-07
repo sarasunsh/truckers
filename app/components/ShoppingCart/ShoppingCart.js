@@ -1,75 +1,74 @@
 'use strict';
 
-import React from 'react';
+import React, {Component} from 'react';
 import { Panel, Table, Button, Glyphicon } from 'react-bootstrap';
 
 const fullLengthStyling = {
     'height': '100%'
 }
 
-// we have access to currentOrders, [{menuItem, quantity}, {menuItem, quantity}, {menuItem, quantity}]
+// we have access to currentOrders, [{menuItem: {name, price, description}, quantity}, {menuItem, quantity}, {menuItem, quantity}]
 
-export default (props) => {
+export default class ShoppingCart extends Component {
 
-    
+    constructor(props){
+        super(props);
+        this.handleRemoveItem = this.handleRemoveItem.bind(this);
+        this.handleAddItem = this.handleAddItem.bind(this);
+    }
 
-    function handleRemoveItem(orderItem){
+    handleRemoveItem(orderItem){
         this.props.removeItem(orderItem)
     }
 
-    function handleAddItem(orderItem){
+    handleAddItem(orderItem){
         this.props.addItem(orderItem)
     }
 
-
-    return (
-        <Panel header="Shopping Cart" style={fullLengthStyling}>
-            <Table responsive>
-                {
-                    props.currentOrders.map(orderItem=>{
-                        return(
-                            <tr>
-                                <td>
-                                    <Glyphicon glyph="minus-sign" onClick={handleRemoveItem(orderItem.menuItem)}/>
-                                        {orderItem.quantity}
-                                    <Glyphicon glyph="plus-sign" onClick={handleAddItem(orderItem.menuItem)}/>
-                                </td>
-                                <td>
-                                    {orderItem.menuItem.name}
-                                </td>
-                                <td>
-                                    {`$${orderItem.menuItem.price * orderItem.quantity}`}
-                                </td>
-                            </tr>
-                        )
-                    })
-                }
-
-
-                <tr>
-                    <td>Item Subtotal</td>
-                    <td>
+    render() {
+        return (
+            <Panel header="Shopping Cart" style={fullLengthStyling}>
+                <Table responsive>
+                    <tbody>
                         {
-                            `$${props.currentOrders.reduce((prev, curr)=>{
-                                const rowCost = curr.menuItem.price * curr.quantity;
-                                return prev + rowCost;
-                            }, 0)}`
+                            this.props.currentOrders.items && this.props.currentOrders.items.map(orderItem=>{
+                                return(
+                                    <tr key={orderItem.menuItem.id}>
+                                        <td>
+                                            <Glyphicon glyph="minus-sign" onClick={()=>this.handleRemoveItem(orderItem.menuItem)}/>
+                                                {orderItem.quantity}
+                                            <Glyphicon glyph="plus-sign" onClick={()=>this.handleAddItem(orderItem.menuItem)}/>
+                                        </td>
+                                        <td>
+                                            {orderItem.menuItem.name}
+                                        </td>
+                                        <td>
+                                            {`$${(orderItem.menuItem.price * orderItem.quantity).toFixed(2)}`}
+                                        </td>
+                                    </tr>
+                                )
+                            })
                         }
-                    </td>
-                </tr>
+
+                        <tr>
+                            <td>Item Subtotal</td>
+                            <td>
+                                {
+                                    `$${this.props.currentOrders.items.reduce((prev, curr)=>{
+                                        const rowCost = parseFloat(curr.menuItem.price) * curr.quantity;
+                                        return prev + rowCost;
+                                    }, 0.00).toFixed(2)}`
+                                }
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </Table>
 
                 <Button>Proceed to Checkout</Button>
 
+            </Panel>
 
-
-
-
-            </Table>
-
-
-
-
-        </Panel>
-
-    )
+        )
+    }
 }
