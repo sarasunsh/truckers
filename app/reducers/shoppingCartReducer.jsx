@@ -11,7 +11,9 @@ import axios from 'axios';
 const 	ADD_ITEM = "ADD_ITEM",
 		REMOVE_ITEM = "REMOVE_ITEM",
 		CLEAR_CART = "CLEAR_CART",
-		ASSIGN_FOODTRUCK_ID = "ASSIGN_FOODTRUCK_ID";
+		ASSIGN_FOODTRUCK_ID = "ASSIGN_FOODTRUCK_ID",
+		ASSIGN_STAGE = "ASSIGN_STAGE";
+
 
 // ACTION CREATORS
 export const addItem = (menuItem) => ({
@@ -33,6 +35,11 @@ export const assignFoodTruckID = (id) => ({
 	id
 })
 
+export const assignStage = (stage) => ({
+	type: ASSIGN_STAGE,
+	stage
+})
+
 
 // THUNK
 // sending an order requires an object with format:
@@ -47,9 +54,9 @@ export const assignFoodTruckID = (id) => ({
 	// 		{menuItemId: 9, quantity: 1},
 	// 	]
 	// }
-export const sendOrderToServertThunk = (orderObject) => {
+export const sendOrderToServerThunk = (orderObject) => {
 	const thunk = (dispatch) => {
-		if (!!orderObject.userID && foodTruckID && !!orders){
+		if (orderObject.userID && orderObject.foodTruckID && orderObject.items){
 			axios.post('/api/orders', orderObject);	
 		} else {
 			console.error("Please provide a userID, foodTruckID, and orders array to submit an order");
