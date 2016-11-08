@@ -1,20 +1,31 @@
 import { browserHistory } from 'react-router'
 
+// -=-=-=-= Reducer =-=-=-=-
 // if authenticated, route from login or signup back to the main page
-// and add the user object to the store 
+// and add the user object to the store. If logged-out, return null.
 const reducer = (state=null, action) => {
     switch(action.type) {
     case AUTHENTICATED:
-        browserHistory.push('/')
-        return action.user
+        // browserHistory.push('/')
+        return action.user;
+    case LOGGED_OUT:
+        // browserHistory.push('/')
+        return null
+    default: return state
     }
-    return state
 }
 
-// if authenticated, pass the user data as an object
+// -=-=-=-= Actions =-=-=-=-=-
 const AUTHENTICATED = 'AUTHENTICATED'
+const LOGGED_OUT = 'LOGGED_OUT'
+
+// -=-=-=-= Action-Creators =-=-=-=-
 export const authenticated = user => ({
     type: AUTHENTICATED, user
+})
+
+export const loggedOut = () => ({
+    type: LOGGED_OUT, user: null
 })
 
 import axios from 'axios'
@@ -29,11 +40,13 @@ export const login = (username, password) =>
             .then(() => dispatch(whoami()))
     }
 
-// I'M NOT YET FUNCTIONAL!
+// Calls our log out action-creator for the reducer and
+// logs out with passport via a an auth routing
 export const logout = () =>
     dispatch => {
+        dispatch(loggedOut())
         return axios.get('/api/auth/logout')
-            .then(() => dispatch(authenticated(null)))
+            .catch()
     }
 
 // Our sign-up first adds the user to the database and then sneaks straight
@@ -48,7 +61,7 @@ export const signup = (name, email, password) =>
 
 // whoami is our utility function to transform a user to an authenticated
 // user by asking passport if the user is valid, and then dispatching an
-// authentication call to the store
+// authentication call to add the user to the 'auth' prop on the store
 export const whoami = () =>
     dispatch =>
         axios.get('/api/auth/whoami')
