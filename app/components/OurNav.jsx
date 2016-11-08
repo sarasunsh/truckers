@@ -3,7 +3,11 @@ import { Link } from 'react-router'
 import { Navbar, Nav, NavItem, FormGroup, FormControl, Button, Glyphicon } from 'react-bootstrap';
 
 export default (props) => {
-    console.log(props);
+    // 'user' is pulled from the 'auth' property of our state. if exists, we provide a Welcome
+    // and switch the 'log in' button to a 'log out'. 'logoutHandler' is meant to handle that
+    // log out request, but is not yet functional
+    const { user, logoutHandler } = props;
+
     return (
         <Navbar>
             <Navbar.Header>
@@ -33,13 +37,13 @@ export default (props) => {
               </Navbar.Form>
               <Nav pullRight>
                   <NavItem>
-                      { props.user === null ? `` : `Welcome, ${props.user.name}`}
+                      { user === null ? `` : `Welcome, ${props.user.name}`}
                   </NavItem>
                   <NavItem eventKey={1}>
                       <Glyphicon glyph="shopping-cart" />
                   </NavItem>
                   <NavItem eventKey={2}>
-                      { props.user === null ? (<Link to={`/login`}>Log In</Link>) : (<Link to={`/`}>Log Out</Link>) }
+                      { user === null ? (<Link to={`/login`}>Log In</Link>) : (<Link to={`/`} onClick={() => logoutHandler()}>Log Out</Link>) }
                   </NavItem>
               </Nav>
           </Navbar.Collapse>

@@ -95,6 +95,8 @@ passport.deserializeUser(
   }
 )
 
+// I handle local user authentication by checking the User database via email
+// and password (which is hashed on the database)
 passport.use(new (require('passport-local').Strategy) (
   (email, password, done) => {
     debug('will authenticate user(email: "%s")', email)
@@ -118,12 +120,17 @@ passport.use(new (require('passport-local').Strategy) (
   }
 ))
 
+// I return user info if found to be valid
 auth.get('/whoami', (req, res) => res.send(req.user))
 
+// I'M NOT YET FUNCTIONAL!
+auth.get('/logout', (req, res) => req.logout())
+
+// I handle user login by authenticating with passport ^^^^^
 auth.post('/:strategy/login', (req, res, next) =>
-  passport.authenticate(req.params.strategy, {
-    successRedirect: '/'
-  })(req, res, next)
+    passport.authenticate(req.params.strategy, {
+        successRedirect: '/'
+    })(req, res, next)
 )
 
 module.exports = auth

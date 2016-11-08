@@ -8,9 +8,9 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = function(dispatch){
+const mapDispatchToProps = (dispatch) => {
     return {
-        onTruckClick: function(filter){
+        onTruckClick: (filter) => {
             const action = toggleFilterAction(filter)
             dispatch(action)
         }
@@ -22,4 +22,3 @@ const mapDispatchToProps = function(dispatch){
 export default connect(
     mapStateToProps
 )(TruckSearch);
-
