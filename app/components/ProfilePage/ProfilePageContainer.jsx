@@ -4,7 +4,12 @@ import { connect } from 'react-redux';
 import ProfilePage from './ProfilePage';
 
 const mapStateToProps = state => ({
-	user: state
+	user: {
+			name: state.auth.name,
+			email: state.auth.email,
+			id: state.auth.id,
+			isVendor: state.auth.isVendor
+	}
 });
 
 const mapDispatchToProps = dispatch => ({

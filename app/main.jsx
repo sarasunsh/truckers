@@ -11,7 +11,7 @@ import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
 import SingleTruckContainer from './components/SingleTruck/SingleTruckContainer';
 import AllTrucks from './components/AllTrucks';
-import ProfilePage from './components/ProfilePage/ProfilePage';
+import ProfilePage from './components/ProfilePage/ProfilePageContainer';
 
 // Dispatcher import
 import { fetchTrucksFromServer } from './reducers/trucks';

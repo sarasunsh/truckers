@@ -14,12 +14,13 @@ export default class ProfilePage extends Component {
 
 	render(){
 
+		const {user} = this.props;
+
 		return(
 			<div id="profile_page">
 				<Row>
 					<Col sm={4}>
-						{console.log(this.props)}
-						<ProfilePanel />
+						<ProfilePanel user={user}/>
 						<PaymentPanel />
 					</Col>
 
