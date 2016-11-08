@@ -2,7 +2,7 @@
 
 const db = require('APP/db')
 const customTruckRoutes = require('express').Router()
-const { FoodTruck, MenuItem } = require('../db/models');
+const { FoodTruck, MenuItem, Review } = require('../db/models');
 
 // If truckID is part of the request parameter, this will store the appropriate truck info on the request
 customTruckRoutes.param('truckID', function(req, res, next, truckID){
@@ -84,6 +84,15 @@ customTruckRoutes.get('/:truckID/menu', function(req, res, next) {
     .catch(next);
 });
 
+// Route to reviews page for specific truck
+customTruckRoutes.get('/:truckID/reviews', function(req, res, next) {
+    Review.findAll({
+        where: {food_truck_id: req.truck.id }
+    })
+    .then(items => res.json(items))
+    .catch(next);
+});
+
 // Route to page for specific item at specific truck
 customTruckRoutes.get('/:truckID/menu/:itemID', function(req, res, next) {
     res.json(req.item);
@@ -103,6 +112,13 @@ customTruckRoutes.post('/', function(req, res, next) {
 customTruckRoutes.post('/:truckID/menu', function(req, res, next) {
     req.truck.createMenuItem(req.body)
     .then(newItem => res.json(newItem))
+    .catch(next);
+});
+
+// Route to create new review for specific truck
+customTruckRoutes.post('/:truckID/reviews', function(req, res, next) {
+    req.truck.createReview(req.body)
+    .then(newReview => res.json(newReview))
     .catch(next);
 });
 

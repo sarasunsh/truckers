@@ -10,8 +10,8 @@ import {addItem, removeItem, clearCart, assignFoodTruckID, sendOrderToServerThun
 
 const mapStateToProps = state => ({
 	currentOrders: state.shoppingCart,
-	// userID: state.auth.id,
-	// foodTruckID: state.currentTruck
+	user: state.auth,
+	foodTruck: state.currentTruck,
 
 });
 
@@ -28,7 +28,7 @@ const mapDispatchToProps = dispatch => ({
 	assignFoodTruckID: function(id){
 		dispatch(assignFoodTruckID(id));
 	},
-	sendOrderToServer: function(orderObject){
+	submitOrderToServer: function(orderObject){
 		const thunk = sendOrderToServerThunk(orderObject);
 		dispatch(thunk);
 	}

@@ -54,9 +54,9 @@ export const assignStage = (stage) => ({
 	// 		{menuItemId: 9, quantity: 1},
 	// 	]
 	// }
-export const sendOrderToServertThunk = (orderObject) => {
+export const sendOrderToServerThunk = (orderObject) => {
 	const thunk = (dispatch) => {
-		if (!!orderObject.userID && foodTruckID && !!orders){
+		if (orderObject.userID && orderObject.foodTruckID && orderObject.items){
 			axios.post('/api/orders', orderObject);	
 		} else {
 			console.error("Please provide a userID, foodTruckID, and orders array to submit an order");

@@ -31,17 +31,17 @@ const Promise = require('sequelize').Promise; // sequelize comes with Bluebird
 	// 	completed: false,
 	// 	foodTruckId: 234,
 	// 	orders: [
-	// 		{menuItemId: 1, quantity: 2},
-	// 		{menuItemId: 2, quantity: 1},
-	// 		{menuItemId: 2, quantity: 1},
-	// 		{menuItemId: 9, quantity: 1},
+	// 		{menuItem: {}, quantity: 2},
+	// 		{menuItem: {}, quantity: 1},
+	// 		{menuItem: {}, quantity: 1},
+	// 		{menuItem: {}, quantity: 1},
 	// 	]
 	// }
 
 customOrderRoutes.post('/', (req, res, next)=>{
-	const userId = req.body.userId; // userId: 123
-	const foodTruckId = req.body.foodTruckId; // foodTruckId: 234
-	const orders = req.body.orders; // orders: { menuItem, quantity }
+	const userId = req.body.userID; // userId: 123
+	const foodTruckId = req.body.foodTruckID; // foodTruckId: 234
+	const orders = req.body.items; // orders: { menuItem, quantity }
 
 	// sanity check: none of these three things can be missing
 	// if !(userId && foodTruckId && orders){
@@ -58,7 +58,7 @@ customOrderRoutes.post('/', (req, res, next)=>{
 			// define each new order's associations
 			const orderPromise = newOrder.setUser(userId);
 			const truckPromise = newOrder.setFoodTruck(foodTruckId);
-			const menuItemPromise = newOrder.addMenuItem(order.menuItemId, {quantity: order.quantity});
+			const menuItemPromise = newOrder.addMenuItem(order.menuItem.id, {quantity: order.quantity});
 				// ^ association table with {quantity} as an extra attribute
 
 			return Promise.all([orderPromise, truckPromise, menuItemPromise]);

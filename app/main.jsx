@@ -6,11 +6,12 @@ import { Provider } from 'react-redux'
 import store from './store'
 
 // Component import
-import App from './components/App/App';
+import AppContainer from './components/App/AppContainer';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
 import SingleTruckContainer from './components/SingleTruck/SingleTruckContainer';
 import AllTrucks from './components/AllTrucks';
+import ProfilePage from './components/ProfilePage/ProfilePageContainer';
 
 // Dispatcher import
 import { fetchTrucksFromServer } from './reducers/trucks';
@@ -32,12 +33,13 @@ const onSingleTruckEnter = (nextRouterState) => {
 render (
     <Provider store={store}>
         <Router history={browserHistory}>
-            <Route path="/" component={App}>
+            <Route path="/" component={AppContainer}>
                 <Route path="/trucks" component={AllTrucks} onEnter={onTrucksEnter}/>
                 <Route path="/trucks/:truckID" component={SingleTruckContainer} onEnter={onSingleTruckEnter}/>
                 <IndexRoute component={AllTrucks}  onEnter={onTrucksEnter}/>
                 <Route path="/login" component={Login} />
                 <Route path="/signup" component={Signup} />
+                <Route path="/profile/:userID" component={ProfilePage} />
             </Route>
         </Router>
     </Provider>,
