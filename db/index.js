@@ -25,4 +25,5 @@ const db = module.exports = new Sequelize(url, {
 // pull in our models
 require('./models');
 
+
 db.didSync = db.sync().then(ok => {console.log('Synced')}).catch();

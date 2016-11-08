@@ -2,7 +2,7 @@
 
 const db = require('APP/db')
 const customTruckRoutes = require('express').Router()
-const { FoodTruck, MenuItem } = require('../db/models');
+const { FoodTruck, MenuItem, Review } = require('../db/models');
 
 // If truckID is part of the request parameter, this will store the appropriate truck info on the request
 customTruckRoutes.param('truckID', function(req, res, next, truckID){
@@ -26,10 +26,47 @@ customTruckRoutes.param('itemID', function(req, res, next, itemID){
 
 /// GET REQUESTS -------------------------------------------------------------
 
+/* GETTER method for average price
+FoodTruck.findAll(
+  include: [(
+    model: MenuItems,
+    where: { food_truck_id: Sequelize.col('foodTruck.id') },
+    attributes: [[Sequelize.fn('AVG', Sequelize.col('price')), 'avgPrice']]
+  )]
+  )
+  .then(trucks => {
+    trucks = trucks.map(truck => {
+      return truck.avgPrice = truck.MenuItems.avgPrice    <---- I think this works, but not sure!
+    });
+    res.json(trucks);
+  })
+  .catch(next)
+
+*/
+
 // Route for main page -- get all trucks
 customTruckRoutes.get('/', function(req, res, next) {
-    FoodTruck.findAll()
-    .then(trucks => res.json(trucks))
+    FoodTruck.findAll({
+        include: [{
+            model: MenuItem,
+            attributes: ['price']          // grab price for each menu item
+        }]
+    })
+    .then(trucks => {
+      /* the below is admittedly funky and gives you an object array of
+         [{{'truck': {all truck props}}, {'avgPrice': $8.32}}, ... ]
+         but Sequelize continually foiled my attempts to create a merged object
+         at this juncture or aggregate above. It's bleh.
+      */
+        const pricedTrucks = trucks.map((truck) => {
+            let prices = truck.menuItems.map(item => {
+                return item['price']                    // prices array
+            })                                          // to reduce \/ for avg
+            let avgPrice = (prices.reduce((x, y) => { return x + y }) / prices.length).toFixed(2)
+            return { truck, avgPrice: avgPrice }        // and add as an object to send with truck
+        })
+        res.json(pricedTrucks)
+    })
     .catch(next);
 });
 
@@ -41,6 +78,15 @@ customTruckRoutes.get('/:truckID', function(req, res, next) {
 // Route to menu page for specific truck
 customTruckRoutes.get('/:truckID/menu', function(req, res, next) {
     MenuItem.findAll({
+        where: {food_truck_id: req.truck.id }
+    })
+    .then(items => res.json(items))
+    .catch(next);
+});
+
+// Route to reviews page for specific truck
+customTruckRoutes.get('/:truckID/reviews', function(req, res, next) {
+    Review.findAll({
         where: {food_truck_id: req.truck.id }
     })
     .then(items => res.json(items))
@@ -66,6 +112,13 @@ customTruckRoutes.post('/', function(req, res, next) {
 customTruckRoutes.post('/:truckID/menu', function(req, res, next) {
     req.truck.createMenuItem(req.body)
     .then(newItem => res.json(newItem))
+    .catch(next);
+});
+
+// Route to create new review for specific truck
+customTruckRoutes.post('/:truckID/reviews', function(req, res, next) {
+    req.truck.createReview(req.body)
+    .then(newReview => res.json(newReview))
     .catch(next);
 });
 

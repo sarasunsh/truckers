@@ -23,7 +23,18 @@ const FoodTruck = db.define('foodTrucks', {
     },
     image: {
         type: Sequelize.TEXT
+    },
+    isOpen: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
+    },
+    rating: {
+        type: Sequelize.INTEGER,
+        validate: {
+          min: 1,
+          max: 5
+        }
     }
-})
+});
 
 module.exports = FoodTruck

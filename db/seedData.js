@@ -20,12 +20,10 @@ const cuisineNames = [
 ]
 
 const foodTruckImageURLs = [
-  'http://imgur.com/gallery/vAq3aNr',
-  'http://imgur.com/gallery/vAq3aNr',
-  'http://imgur.com/gallery/0aQAEzr',
-  'http://imgur.com/gallery/3ouPK3G',
-  'http://imgur.com/gallery/8rRfx',
-  'http://imgur.com/gallery/oYLj0'
+  'http://freevectorfinder.com/images/thumb/indian-food-logo-40391.jpg',
+  'http://freevectorfinder.com/images/thumb/mexican-food-logo-with-cactus-40800.jpg',
+  'http://freevectorfinder.com/images/thumb/mexican-food-logo-with-hat-40156.jpg',
+  'http://www.ncstatefair.org/2016/Visitor/images/web_graphics_242x200px-30.png'
 ]
 
 const foodTruckModel = casual.define('foodTruckModel', () => {
@@ -35,7 +33,9 @@ const foodTruckModel = casual.define('foodTruckModel', () => {
     location: casual.address,
     website: casual.url,
     cuisine: casual.random_element(cuisineNames),
-    image: casual.random_element(foodTruckImageURLs)
+    image: casual.random_element(foodTruckImageURLs),
+    isOpen: casual.coin_flip,
+    rating: casual.integer(1, 5)
   }
 })
 
@@ -49,15 +49,15 @@ const menuItemModel = casual.define('menuItemModel', () => {
   }
 })
 
-const userModel = casual.define('userModel', () => {
-  return {
-    name: casual.full_name,
-    email: casual.email,
-    isVendor: casual.coin_flip
-    // ,
-    // food_truck_id: casual.integer(1, NUMBER_OF_FOOD_TRUCKS)
-  }
-})
+// const userModel = casual.define('userModel', () => {
+//   return {
+//     name: casual.full_name,
+//     email: casual.email,
+//     isVendor: casual.coin_flip
+//     // ,
+//     // food_truck_id: casual.integer(1, NUMBER_OF_FOOD_TRUCKS)
+//   }
+// })
 
 const dataGenerator = (times, generator) => {
   let data = [];
@@ -71,4 +71,4 @@ const dataGenerator = (times, generator) => {
 
 exports.foodTrucks = dataGenerator(NUMBER_OF_FOOD_TRUCKS, casual._foodTruckModel);
 exports.menuItems = dataGenerator(NUMBER_OF_MENU_ITEMS, casual._menuItemModel);
-exports.users = dataGenerator(NUMBER_OF_USERS, casual._userModel);
+// exports.users = dataGenerator(NUMBER_OF_USERS, casual._userModel);
