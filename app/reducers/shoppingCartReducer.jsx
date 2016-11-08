@@ -11,7 +11,9 @@ import axios from 'axios';
 const 	ADD_ITEM = "ADD_ITEM",
 		REMOVE_ITEM = "REMOVE_ITEM",
 		CLEAR_CART = "CLEAR_CART",
-		ASSIGN_FOODTRUCK_ID = "ASSIGN_FOODTRUCK_ID";
+		ASSIGN_FOODTRUCK_ID = "ASSIGN_FOODTRUCK_ID",
+		ASSIGN_STAGE = "ASSIGN_STAGE";
+
 
 // ACTION CREATORS
 export const addItem = (menuItem) => ({
@@ -31,6 +33,11 @@ export const clearCart = () => ({
 export const assignFoodTruckID = (id) => ({
 	type: ASSIGN_FOODTRUCK_ID,
 	id
+})
+
+export const assignStage = (stage) => ({
+	type: ASSIGN_STAGE,
+	stage
 })
 
 

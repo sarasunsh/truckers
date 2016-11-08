@@ -76,7 +76,14 @@ export default class ShoppingCart extends Component {
 
                 </Table>
 
-                <Button>Proceed to Checkout</Button>
+                <Button bsStyle="success">Proceed to Checkout for $
+                {
+                    `${this.props.currentOrders.items.reduce((prev, curr)=>{
+                        const rowCost = parseFloat(curr.menuItem.price) * curr.quantity;
+                        return prev + rowCost;
+                    }, 0.00).toFixed(2)}`
+                }
+                </Button>             
 
             </Panel>
 
