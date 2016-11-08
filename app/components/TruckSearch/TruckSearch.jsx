@@ -7,7 +7,6 @@ export default class TruckSearch extends Component {
     render() {
         // Utility functions are used to filter out trucks that do not fit the user's selected filters
         const { trucks, filters } = this.props;
-        console.log(trucks);
         const filterArr = pullFilters(filters);
         const filterTrucks = trucks.filter(truck => checkFilters(truck, filterArr, filters));
 

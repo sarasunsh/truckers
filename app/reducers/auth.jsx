@@ -1,6 +1,9 @@
+import { browserHistory } from 'react-router'
+
 const reducer = (state=null, action) => {
     switch(action.type) {
     case AUTHENTICATED:
+        browserHistory.push('/')
         return action.user
     }
     return state
@@ -26,7 +29,7 @@ export const signup = (name, email, password) =>
         const body = {name, email, password}
         console.log('req body=', body)
         return axios.post('/api/users', body)
-          .then(() => dispatch(whoami()))
+          .then((res) => dispatch(authenticated(res.data)))
     }
 
 export const whoami = () =>
