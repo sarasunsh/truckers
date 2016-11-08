@@ -4,8 +4,8 @@ import { Navbar, Nav, NavItem, FormGroup, FormControl, Button, Glyphicon } from 
 
 export default (props) => {
     // 'user' is pulled from the 'auth' property of our state. if exists, we provide a Welcome
-    // and switch the 'log in' button to a 'log out'. 'logoutHandler' is meant to handle that
-    // log out request, but is not yet functional
+    // and switch the 'log in' button to a 'log out'. 'logoutHandler' handles a logout request
+    // on user click
     const { user, logoutHandler } = props;
 
     return (
