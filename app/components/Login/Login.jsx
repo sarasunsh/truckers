@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router'
 import { Button, Col, ControlLabel, FormControl, FormGroup } from 'react-bootstrap'
 import OurNav from '../OurNav'
 
@@ -21,6 +22,9 @@ export class Login extends Component {
                           <Button type="submit">Login</Button>
                       </FormGroup>
                   </form>
+                  <div>
+                    <span>Register for an <Link to={`/signup`}>Account</Link></span>
+                  </div>
               </Col>
           </div>
      )

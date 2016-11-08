@@ -1,34 +1,21 @@
 'use strict';
 
 import { connect } from 'react-redux';
-
 import App from './App';
-// import { nextSong, setProgress } from '../action-creators/player';
-// import { receiveAlbums } from '../action-creators/albums';
-// import { receiveArtists } from '../action-creators/artists';
+import { logout } from '../../reducers/auth'
 
+// pass the user as the 'auth' property on props
+const mapStateToProps = state => ({
+    auth: state.auth
+})
 
-const mapStateToProps = function(state) {
-    return {
-        trucks: 'test'
+// pass the logout function as a handler 
+const mapDispatchToProps = dispatch => ({
+    logoutHandler: () => {
+        dispatch(logout())
     }
-}
-
-// const mapDispatchToProps = dispatch => ({
-//   onLoad (albums, artists) {
-//     dispatch(receiveAlbums(albums));
-//     dispatch(receiveArtists(artists));
-
-//     AUDIO.addEventListener('ended', () => {
-//       dispatch(nextSong());
-//     });
-
-//     AUDIO.addEventListener('timeupdate', () => {
-//       dispatch(setProgress(AUDIO.currentTime / AUDIO.duration));
-//     });
-//   }
-// });
+})
 
 export default connect(
-    mapStateToProps
+    mapStateToProps, mapDispatchToProps
 )(App);
