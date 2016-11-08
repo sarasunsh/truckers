@@ -6,10 +6,10 @@ import { browserHistory } from 'react-router'
 const reducer = (state=null, action) => {
     switch(action.type) {
     case AUTHENTICATED:
-        browserHistory.push('/')
+        // browserHistory.push('/')
         return action.user;
     case LOGGED_OUT:
-        browserHistory.push('/')
+        // browserHistory.push('/')
         return null
     default: return state
     }

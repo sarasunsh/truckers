@@ -10,7 +10,7 @@ const Order = require('./orders');
 const MenuItem = require('./menuItem');
 const FoodTruck = require('./foodTruck')
 const OrderItem = require('./orderItem');
-
+const Review = require('./review');
 
 // http://docs.sequelizejs.com/en/latest/docs/associations/
 Order.belongsTo(User);  // puts a UserID in the Order table
@@ -28,4 +28,8 @@ FoodTruck.belongsTo(User); // or else cyclic dependency
 Order.belongsToMany(MenuItem, {through: OrderItem});
 MenuItem.belongsToMany(Order, {through: OrderItem });
 
-module.exports = { User, Order, FoodTruck, MenuItem, OrderItem };
+Review.belongsTo(User);
+Review.belongsTo(FoodTruck);
+FoodTruck.hasMany(Review);
+
+module.exports = { User, Order, FoodTruck, MenuItem, OrderItem, Review };
