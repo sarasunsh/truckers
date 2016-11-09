@@ -11,11 +11,13 @@ import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
 import SingleTruckContainer from './components/SingleTruck/SingleTruckContainer';
 import AllTrucks from './components/AllTrucks';
-import ProfilePage from './components/ProfilePage/ProfilePageContainer';
+import ProfilePageContainer from './components/ProfilePage/ProfilePageContainer';
 
 // Dispatcher import
 import { fetchTrucksFromServer } from './reducers/trucks';
 import { fetchSingleTruckFromServer } from './reducers/singleTruck';
+import { fetchSingleUserFromServer } from './reducers/user';
+
 
 // onEnter prompts ----------------------------------------------------
 const onTrucksEnter = () => {
@@ -29,6 +31,12 @@ const onSingleTruckEnter = (nextRouterState) => {
     store.dispatch(thunk);
 };
 
+const onUserEnter = (nextRouterState) => {
+    const userID = nextRouterState.params.userID;
+    const thunk = fetchSingleUserFromServer(userID);
+    store.dispatch(thunk);
+};
+
 // React-Router--------------------------------------------------------
 render (
     <Provider store={store}>
@@ -39,7 +47,7 @@ render (
                 <IndexRoute component={AllTrucks} onEnter={onTrucksEnter}/>
                 <Route path="/login" component={Login} />
                 <Route path="/signup" component={Signup} />
-                <Route path="/profile/:userID" component={ProfilePage} />
+                <Route path="/profile/:userID" component={ProfilePageContainer} onEnter={onUserEnter}/>
             </Route>
         </Router>
     </Provider>,

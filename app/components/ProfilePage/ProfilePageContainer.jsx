@@ -40,3 +40,10 @@ export default connect(mapStateToProps, null)(ProfilePage);
 // updated_at
 // :
 // "2016-11-08T19:05:08.017Z"
+
+const mapStateToProps = state => ({
+    user: state.currentUser
+});
+
+
+export default connect(mapStateToProps, null)(ProfilePage);

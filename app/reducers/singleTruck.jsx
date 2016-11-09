@@ -32,7 +32,6 @@ export const fetchSingleTruckFromServer = (truckID) => {
     return thunk;
 }
 
-
 export const addNewReview = function(review, truckID) {
     const thunk = function(dispatch){
         axios.post(`/api/trucks/${truckID}/reviews`, review)
