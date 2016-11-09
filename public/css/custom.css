@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700');
+
+*{
+	font-family:"Lato", sans-serif;
+}
+
+a {
+	text-decoration: none !important;
+}
+
+
+
+.customNav a {
+	color:#F17E40;
+}
+
+.customNav {
+	display: flex;
+	
+	background-color: white;
+	height:50px;
+	border-bottom: 1px solid #F0F0F0;
+}
+
+.navSection{
+	display: flex;
+}
+
+.navButton{
+	float:right;
+	padding: 15px 20px;
+	text-align: center;
+}
+
+.navButton:hover{
+	background-color: #F7F7F7;
+}
+
+.navButton span{
+	position: relative;
+}
+
+.searchSection{
+	width:50%;
+}
+
+.logoDiv{
+	padding: 10px 0 0 30px;
+	width:180px;
+}
+
+.logo{
+	height:24px;
+}
+
+.verticalDivider {
+	border-left: 1px solid #F0F0F0;
+	height:100%;
+	display:inline-block;
+}
+
+.search{
+	color: #808080;
+	letter-spacing: 0.05em;
+	padding: 10px;
+	box-sizing: border-box;
+	width: 100%;
+	transition: 0.5s;
+	outline: none;
+	height:49px;
+	border:none;
+}
+
+.locationIcon{
+	background-image:url('./location_icon.png');
+	background-repeat: no-repeat;
+	background-position:6px;
+}
+
+.shoppingBagIcon{
+	height:20px;
+}
+
+.searchIcon{
+	background: url('./search_icon.png') no-repeat;
+}
+
+.search:focus{
+	background-color: #F7F7F7;
+}
+
+/* all Trucks */
+.allTrucksContainer {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.truckPanelItem {
+	transition: 0.5s;
+	margin:25px;
+	width:300px;
+	box-shadow: 2px 2px 5px rgba(0,0,0,0.1)
+}
+
+.truckPanelItem:hover {
+	box-shadow: 2px 2px 5px rgba(0,0,0,0.2)
+}
+
+.truckItemContent{
+	padding:15px;
+}
+
+.fullWidthImage {
+	width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
