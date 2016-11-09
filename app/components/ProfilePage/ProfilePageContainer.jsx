@@ -3,20 +3,14 @@
 import { connect } from 'react-redux';
 import ProfilePage from './ProfilePage';
 
-const mapStateToProps = state => ({
-	user: {
-			name: state.auth.name,
-			email: state.auth.email,
-			id: state.auth.id,
-			isVendor: state.auth.isVendor
-	}
-});
-
-const mapDispatchToProps = dispatch => ({
-
-});
-
-export default connect(mapStateToProps, null)(ProfilePage);
+// const mapStateToProps = state => ({
+// 	user: {
+// 			name: state.auth.name,
+// 			email: state.auth.email,
+// 			id: state.auth.id,
+// 			isVendor: state.auth.isVendor
+// 	}
+// });
 
 
 // created_at
