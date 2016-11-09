@@ -17,7 +17,7 @@ export const loadCurrentUser = (fetchedUser) => {
 export const fetchSingleUserFromServer = (userID) => {
     const thunk = (dispatch) => {
         const getUser = axios.get(`/api/profile/${userID}`);
-        const getOrders = axios.get(`/api/profile/${userID}/orders`);
+        const getOrders = axios.get(`/api/orders/user/${userID}`);
         const getReviews = axios.get(`/api/profile/${userID}/reviews`);
 
         Promise.all([getUser, getOrders, getReviews])
