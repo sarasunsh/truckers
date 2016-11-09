@@ -6,10 +6,9 @@ import { browserHistory } from 'react-router'
 const reducer = (state=null, action) => {
     switch(action.type) {
     case AUTHENTICATED:
-        // browserHistory.push('/')
         return action.user;
     case LOGGED_OUT:
-        // browserHistory.push('/')
+        browserHistory.push('/');
         return null
     default: return state
     }
@@ -38,6 +37,7 @@ export const login = (username, password) =>
         console.log('req body=', body)
         return axios.post('/api/auth/local/login', body)
             .then(() => dispatch(whoami()))
+            .then(() => browserHistory.push('/'))
     }
 
 // Calls our log out action-creator for the reducer and
@@ -57,6 +57,7 @@ export const signup = (name, email, password) =>
         console.log('req body=', body)
         return axios.post('/api/users', body)
             .then((res) => dispatch(authenticated(res.data)))
+            .then(() => browserHistory.push('/'))
     }
 
 // whoami is our utility function to transform a user to an authenticated
