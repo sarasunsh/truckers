@@ -36,7 +36,7 @@ const FoodTruck = db.define('foodTrucks', {
         }
     }
 }, {
-    timestamps: false;
+    timestamps: false
 });
 
 module.exports = FoodTruck

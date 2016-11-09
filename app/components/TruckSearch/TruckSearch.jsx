@@ -11,10 +11,10 @@ export default class TruckSearch extends Component {
         const filterTrucks = trucks.filter(truck => checkFilters(truck, filterArr, filters));
 
         return (
-            <div className="row">
+            <div className="allTrucksContainer">
                 {
                     filterTrucks.map( truck => (
-                        <div className="col-xs-4" key={truck.id}>
+                        <div className="truckPanelItem" key={truck.id}>
                             <TruckItem
                                 id={truck.id}
                                 name={truck.name}
