@@ -11,6 +11,7 @@ import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
 import SingleTruckContainer from './components/SingleTruck/SingleTruckContainer';
 import AllTrucks from './components/AllTrucks';
+import ProfilePage from './components/ProfilePage/ProfilePageContainer';
 
 // Dispatcher import
 import { fetchTrucksFromServer } from './reducers/trucks';
@@ -38,6 +39,7 @@ render (
                 <IndexRoute component={AllTrucks} onEnter={onTrucksEnter}/>
                 <Route path="/login" component={Login} />
                 <Route path="/signup" component={Signup} />
+                <Route path="/profile/:userID" component={ProfilePage} />
             </Route>
         </Router>
     </Provider>,

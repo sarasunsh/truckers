@@ -8,7 +8,7 @@ const reducer = (state=null, action) => {
     case AUTHENTICATED:
         return action.user;
     case LOGGED_OUT:
-        browserHistory.push('/')
+        browserHistory.push('/');
         return null
     default: return state
     }
