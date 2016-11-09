@@ -9,8 +9,8 @@ export default class ReviewList extends Component {
             <div>
                 <Panel collapsible defaultExpanded header="Reviews">
                     {this.props.reviews.map(review => (
-                        <ListGroupItem key={review.id} item={review}>{review.content}
-                        </ListGroupItem>
+                        <ListGroupItem key={review.id}>{review.content}
+                         </ListGroupItem>
                         )
                     )}
                 </Panel>
