@@ -35,6 +35,8 @@ const FoodTruck = db.define('foodTrucks', {
           max: 5
         }
     }
+}, {
+    timestamps: false;
 });
 
 module.exports = FoodTruck
