@@ -16,19 +16,20 @@ export default class TruckItem extends Component {
         };
 
         return (
-              <Grid>
-                  <Row>
-                      <Col xs={12} sm={6} md={3}>
-                          <Link to={`/trucks/${this.props.id}`}>
-                              <Image src={this.props.image} alt="242x200" responsive />
-                          </Link>
-                              <h3>{this.props.name}</h3>
-                              <h4 style={h4CuisineStyle}>{this.props.cuisine}</h4>
-                              <span>${this.props.avgPrice}</span>
-                              <p>{this.props.description}</p>
-                      </Col>
-                  </Row>
-              </Grid>
+            
+                <div>
+                    <Link to={`/trucks/${this.props.id}`}>  
+                        <img src={this.props.image} className='fullWidthImage'/>
+                    </Link>
+
+                    <div className="truckItemContent">
+                        <h3>{this.props.name}</h3>
+                        <h4 style={h4CuisineStyle}>{this.props.cuisine}</h4>
+                        <span>${this.props.avgPrice}</span>
+                        <p>{this.props.description}</p>
+                    </div>
+                </div>
+            
         )
-  }
+    }
 }
