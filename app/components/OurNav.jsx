@@ -37,7 +37,7 @@ export default (props) => {
               </Navbar.Form>
               <Nav pullRight>
                   <NavItem>
-                      { user === null ? `` : `Welcome, ${props.user.name}`}
+                      { user === null ? `` : <Link to={`/profile/${user.id}`}>{`Welcome, ${props.user.name}`}</Link>}
                   </NavItem>
                   <NavItem eventKey={1}>
                       <Glyphicon glyph="shopping-cart" />
