@@ -11,7 +11,7 @@ export default (props) => {
 
       			{props.reviews.map(review => (
                           <ListGroupItem key={review.id}>
-                              <h4>{review.rating}</h4>
+                              <h4>{review.rating} stars</h4>
                               {review.content}
                           </ListGroupItem>
                       )

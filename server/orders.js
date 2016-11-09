@@ -101,7 +101,7 @@ customOrderRoutes.get('/user/:userId', (req, res, next)=>{
 
 	Order.findAll({
 		where: { user_id: userId },
-		include: [{ model: MenuItem }]
+		include: [{ model: MenuItem }, { model: FoodTruck }]
 	})
 	.then(allOrdersFromThisUser=>{
 		res.json(allOrdersFromThisUser);
